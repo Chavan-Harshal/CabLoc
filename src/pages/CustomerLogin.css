@@ -1,0 +1,48 @@
+.CustomerLogin {
+    background-image: url('https://images.unsplash.com/photo-1582820795651-f358eebe4406?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=871&q=80');
+    background-size: cover;
+    height: 100vh;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.CustomerLogin label {
+    margin-top: 10%;
+}
+.CustomerLogin h1 {
+    margin-top: 10%;
+}
+
+.CustomerLogin span {
+    margin-top: 80px;
+}
+
+.CustomerLogin input {
+    width: 300px;
+}
+
+.login  {
+    background-color: rgb(5, 5, 5, 0.75);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login a {
+    margin-top: 10px;
+    color: white;
+    margin-bottom: 50px;
+}
+
+.login button {
+    margin-top: 20px;
+}
+
+.register {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+}
