@@ -1,0 +1,52 @@
+.Navbar {
+    position: fixed;
+    width: 100%;
+    background-color: rgb(0, 0, 0);
+    text-align: left;
+    font-family: 'Times New Roman', Times, serif;
+
+}
+.Navbar b {
+    color: #ffffff;
+    margin-left: 20px;
+    font-size: 25px;
+
+}
+
+.Brand span{
+    color: white;
+    font-style: italic;
+    font-size: 25px;
+    font-family: 'Dancing Script', cursive;
+    margin-left: 15px;
+}
+.ms-auto span{
+    color: white;
+    
+}
+
+.ms-auto span:hover {
+    color: black;
+    background-color: white;
+    border-radius: 3px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.Navbar b:hover {
+    cursor: pointer;
+}
+
+.Navbar img {
+    margin-left: 20px;
+    margin-bottom: 5px;
+    height: 30px;
+    width: 30px
+}
+
+.Navbar img:hover {
+    cursor: pointer;
+}
+.ms-auto {
+    margin-right: 10px;
+}
