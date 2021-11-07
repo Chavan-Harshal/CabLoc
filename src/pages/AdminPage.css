@@ -1,0 +1,49 @@
+.AdminPage {
+  background-image: url("https://images.unsplash.com/photo-1582820795651-f358eebe4406?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=871&q=80");
+  font-family: "Times New Roman", Times, serif;
+  background-size: cover;
+  height: 100vh;
+}
+
+.Admin {
+  background-color: rgb(0, 0, 0, 0.7);
+}
+
+.jumbotron {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 255, 255, 0.9);
+  margin-left: 330px;
+  margin-right: 330px;
+  height: 100vh;
+}
+
+.jumbotron img {
+  margin-top: 100px;
+  height: 200px;
+  width: 200px;
+}
+
+.jumbotron h1 {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.jumbotron button {
+  width: 150px;
+  margin-top: 10px;
+}
+
+.register label {
+  margin-top: 10px;
+}
+
+.register input {
+  width: 400px;
+}
+
+.modal-body th {
+  width: 200px;
+}
