@@ -29,7 +29,7 @@ class CustomerLogin extends Component {
       add: this.state.add,
     };
     console.log(data);
-    axios.post(BACKEND_URL + "/register", data).then((res) => {
+    axios.post(BACKEND_URL + "/api/register", data).then((res) => {
       console.log(res);
     });
   };

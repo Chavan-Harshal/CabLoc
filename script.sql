@@ -40,7 +40,8 @@ CREATE TABLE taxi1 (
     color varchar(20),
     number int,
     driver_id int,
-    PRIMARY KEY (taxi_id, driver_id)
+    model varchar(20),
+    PRIMARY KEY (taxi_id)
     -- FOREIGN KEY (driver_id) REFERENCES driver1(driver_id)
 );
 
@@ -143,8 +144,8 @@ CREATE TABLE works (
     driver_id varchar(20),
     shift_id varchar(20),
     PRIMARY KEY (driver_id, shift_id),
-    FOREIGN KEY (driver_id) REFERENCES driver1(driver_id),
-    FOREIGN KEY (shift_id) REFERENCES shifts(shift_id)
+    FOREIGN KEY (driver_id) REFERENCES driver1(driver_id)
+    -- FOREIGN KEY (shift_id) REFERENCES shifts(shift_id)
 );
 
 CREATE TABLE drives (
@@ -159,8 +160,8 @@ CREATE TABLE availability (
     taxi_id varchar(20),
     zipcode int,
     PRIMARY KEY(taxi_id, zipcode),
-    FOREIGN KEY (taxi_id) REFERENCES taxi1(taxi_id),
-    FOREIGN KEY (zipcode) REFERENCES location(zipcode)
+    FOREIGN KEY (taxi_id) REFERENCES taxi1(taxi_id)
+    -- FOREIGN KEY (zipcode) REFERENCES location(zipcode)
 );
 
 
@@ -168,8 +169,8 @@ CREATE TABLE present_at (
     driver_id varchar(20),
     zipcode int,
     PRIMARY KEY (driver_id, zipcode),
-    FOREIGN KEY (driver_id) REFERENCES driver1(driver_id),
-    FOREIGN KEY (zipcode) REFERENCES location(zipcode)
+    FOREIGN KEY (driver_id) REFERENCES driver1(driver_id)
+    -- FOREIGN KEY (zipcode) REFERENCES location(zipcode)
 );
 
 CREATE TABLE used_for(

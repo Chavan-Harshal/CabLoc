@@ -5,6 +5,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const connection = require("./connection");
 const router = require("./routes/loginreg");
+const adminroute = require("./routes/admin");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
@@ -14,3 +15,4 @@ app.listen(port, () => {
 });
 
 app.use("/api", router);
+app.use("/admin", adminroute);

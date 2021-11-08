@@ -4,6 +4,7 @@ import "./AdminPage.css";
 import Axios from "axios";
 import ReactNotification, { store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
+import { BACKEND_URL } from "../config";
 
 class AdminPage extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class AdminPage extends Component {
   getGarage = () => {
     Axios({
       method: "get",
-      url: "#",
+      url: BACKEND_URL + "/admin/getgarage",
     })
       .then((res) => {
         console.log(res.data);
@@ -94,7 +95,7 @@ class AdminPage extends Component {
     };
     await Axios({
       method: "post",
-      url: "#",
+      url: BACKEND_URL + "/admin/adddriver",
       data: data,
     })
       .then((res) => {
