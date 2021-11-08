@@ -6,7 +6,7 @@ CREATE TABLE user1 (
 
 CREATE TABLE user2 (
     user_id varchar(20), 
-    phono_no int, 
+    phono_no varchar(10), 
     PRIMARY KEY (user_id)
 );
 
@@ -17,7 +17,7 @@ CREATE TABLE user3 (
 );
 
 CREATE TABLE user4 (
-    phone_no int, 
+    phone_no varchar(10), 
     name varchar(20),
     PRIMARY KEY (phone_no)
 );
@@ -62,7 +62,7 @@ CREATE TABLE taxi3 (
 CREATE TABLE driver1 (
     driver_id varchar(20),
     d_name varchar(20),
-    d_phone_no int, 
+    d_phone_no varchar(10), 
     taxi_id varchar(20), 
     rating int,
     PRIMARY KEY (driver_id, taxi_id),
@@ -71,13 +71,13 @@ CREATE TABLE driver1 (
 
 CREATE TABLE driver2 (
     driver_id varchar(20), 
-    d_phone_no int,
+    d_phone_no varchar(10),
     PRIMARY KEY (driver_id),
     FOREIGN KEY (driver_id) REFERENCES driver1(driver_id)
 );
 
 CREATE TABLE driver3 (
-    d_phone_no int, 
+    d_phone_no varchar(10), 
     d_name varchar(20),
     PRIMARY KEY (d_phone_no)
 );

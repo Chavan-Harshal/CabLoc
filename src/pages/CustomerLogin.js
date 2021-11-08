@@ -4,16 +4,71 @@ import AppNavbar from "../components/AppNavbar";
 import "./CustomerLogin.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import axios from "axios";
+import { BACKEND_URL } from "../config";
+import { Redirect } from "react-router";
 
 class CustomerLogin extends Component {
   constructor(props) {
     super(props);
     this.state = {
       login: false,
+      name: "",
+      pass: "",
+      phno: "",
+      add: "",
+      register: false,
     };
   }
   register = () => {
-    this.setState({ register: true });
+    // this.setState({ register: true });
+    const data = {
+      name: this.state.name,
+      pass: this.state.pass,
+      ph: this.state.phno,
+      add: this.state.add,
+    };
+    console.log(data);
+    axios.post(BACKEND_URL + "/register", data).then((res) => {
+      console.log(res);
+    });
+  };
+
+  login = () => {
+    const data = {
+      name: this.state.name,
+      pass: this.state.pass,
+    };
+    console.log(data);
+    axios.post(BACKEND_URL + "/login", data).then((res) => {
+      if (res.status === 200) {
+        this.props.history.push("/CustomerPage");
+      }
+    });
+  };
+
+  handlename = (e) => {
+    this.setState({ name: e.target.value });
+  };
+
+  handlepass = (e) => {
+    this.setState({ pass: e.target.value });
+  };
+
+  handleadd = (e) => {
+    this.setState({ add: e.target.value });
+  };
+
+  handleph = (e) => {
+    this.setState({ phno: e.target.value });
+  };
+
+  loginname = (e) => {
+    this.setState({ name: e.target.value });
+  };
+
+  loginpass = (e) => {
+    this.setState({ pass: e.target.value });
   };
 
   render() {
@@ -33,15 +88,23 @@ class CustomerLogin extends Component {
                     type="text"
                     className="form-control"
                     placeholder="Enter Name"
+                    onChange={this.loginname}
                   />
                   <label>Password</label>
                   <input
                     type="password"
                     className="form-control"
                     placeholder="Enter Password"
+                    onChange={this.loginpass}
                   />
                 </div>
-                <button class="btn btn-outline-light">Log in</button>
+                <button
+                  type="button"
+                  class="btn btn-outline-light"
+                  onClick={this.login}
+                >
+                  Log in
+                </button>
                 <span>Not Registered yet ?</span>
                 <button
                   type="button"
@@ -71,24 +134,28 @@ class CustomerLogin extends Component {
                           type="text"
                           className="form-control"
                           placeholder="Enter Name"
+                          onChange={this.handlename}
                         />
                         <label>Password</label>
                         <input
                           type="password"
                           className="form-control"
                           placeholder="Enter Password"
+                          onChange={this.handlepass}
                         />
                         <label>Mobile No</label>
                         <input
                           type="tel"
                           className="form-control"
                           placeholder="Enter mobile no"
+                          onChange={this.handleph}
                         />
                         <label>Address</label>
                         <input
                           type="text"
                           className="form-control"
                           placeholder="Enter address"
+                          onChange={this.handleadd}
                         />
                       </form>
                     </div>
@@ -104,6 +171,7 @@ class CustomerLogin extends Component {
                         type="button"
                         class="btn btn-outline-dark"
                         data-bs-dismiss="modal"
+                        onClick={this.register}
                       >
                         Register
                       </button>

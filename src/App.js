@@ -5,6 +5,7 @@ import CustomerLogin from "./pages/CustomerLogin";
 // import DriverLogin from "./pages/DriverLogin";
 // s CustomerPage from './pages/CustomerPage';
 import "bootstrap/dist/css/bootstrap.min.css";
+import CustomerPage from "./pages/CustomerPage";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route exact path="/" component={HomePage} />
         <Route exact path="/CustomerLogin" component={CustomerLogin} />
         {/* <Route exact path="/DriverLogin" component={DriverLogin} /> */}
+        <Route exact path="/CustomerPage" component={CustomerPage} />
       </BrowserRouter>
     </div>
   );
