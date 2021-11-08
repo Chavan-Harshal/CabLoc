@@ -40,4 +40,28 @@ router.post("/login", async (req, res) => {
   );
 });
 
+router.post("/driverlogin", (req, res) => {
+  console.log(req.body);
+  const { name, pass } = req.body;
+  console.log(req.body);
+  connection.query(
+    `SELECT * FROM driver1 WHERE d_name="${name}" and driver_id="${pass}";`,
+    // `select * from driver1`,
+    (e, op) => {
+      console.log(op);
+      if (e) {
+        console.log(e);
+        return res.status(404).json({ msg: "Some error occured" });
+      } else {
+        if (op.length === 0) {
+          console.log("yes");
+          return res.status(200).json({ msg: "Invalid creds" });
+        } else {
+          return res.status(200).json({ msg: "Success", data: op });
+        }
+      }
+    }
+  );
+});
+
 module.exports = router;

@@ -3,16 +3,42 @@ import ReactNotification, { store } from "react-notifications-component";
 import AppNavbar from "../components/AppNavbar";
 import "./CustomerLogin.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios";
+import { BACKEND_URL } from "../config";
 
 class DriverLogin extends Component {
   constructor(props) {
     super(props);
     this.state = {
       login: false,
+      name: "",
+      pass: "",
     };
   }
   register = () => {
     this.setState({ register: true });
+  };
+
+  handlename = (e) => {
+    this.setState({ name: e.target.value });
+  };
+
+  handlepass = (e) => {
+    this.setState({ pass: e.target.value });
+  };
+
+  login = () => {
+    const data = {
+      name: this.state.name,
+      pass: this.state.pass,
+    };
+    console.log(data);
+    axios.post(BACKEND_URL + "/api/driverlogin", data).then((res) => {
+      console.log(res);
+      if (res.status === 200) {
+        this.props.history.push("/DriverPage");
+      }
+    });
   };
 
   render() {
@@ -32,15 +58,23 @@ class DriverLogin extends Component {
                     type="text"
                     className="form-control"
                     placeholder="Enter Name"
+                    onChange={this.handlename}
                   />
                   <label>Password</label>
                   <input
                     type="password"
                     className="form-control"
                     placeholder="Enter Password"
+                    onChange={this.handlepass}
                   />
                 </div>
-                <button class="btn btn-outline-light">Log in</button>
+                <button
+                  type="button"
+                  class="btn btn-outline-light"
+                  onClick={this.login}
+                >
+                  Log in
+                </button>
               </form>
             </div>
           ) : (
