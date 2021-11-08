@@ -9,10 +9,26 @@ class AdminLogin extends Component {
     super(props);
     this.state = {
       login: false,
+      name: "",
+      pass: "",
     };
   }
   register = () => {
     this.setState({ register: true });
+  };
+
+  handlename = (e) => {
+    this.setState({ name: e.target.value });
+  };
+
+  handlepass = (e) => {
+    this.setState({ pass: e.target.value });
+  };
+
+  login = () => {
+    if (this.state.name === "nikitatipule" && this.state.pass === "nikita26") {
+      this.props.history.push("/AdminPage");
+    }
   };
 
   render() {
@@ -32,15 +48,23 @@ class AdminLogin extends Component {
                     type="text"
                     className="form-control"
                     placeholder="Enter Name"
+                    onChange={this.handlename}
                   />
                   <label>Password</label>
                   <input
                     type="password"
                     className="form-control"
                     placeholder="Enter Password"
+                    onChange={this.handlepass}
                   />
                 </div>
-                <button class="btn btn-outline-light">Log in</button>
+                <button
+                  type="button"
+                  class="btn btn-outline-light"
+                  onClick={this.login}
+                >
+                  Log in
+                </button>
               </form>
             </div>
           ) : (

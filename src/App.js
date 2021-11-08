@@ -6,6 +6,8 @@ import CustomerLogin from "./pages/CustomerLogin";
 // s CustomerPage from './pages/CustomerPage';
 import "bootstrap/dist/css/bootstrap.min.css";
 import CustomerPage from "./pages/CustomerPage";
+import AdminLogin from "./pages/AdminLogin";
+import AdminPage from "./pages/AdminPage";
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
         <Route exact path="/CustomerLogin" component={CustomerLogin} />
         {/* <Route exact path="/DriverLogin" component={DriverLogin} /> */}
         <Route exact path="/CustomerPage" component={CustomerPage} />
+        <Route exact path="/AdminLogin" component={AdminLogin} />
+        <Route exact path="/AdminPage" component={AdminPage} />
       </BrowserRouter>
     </div>
   );
