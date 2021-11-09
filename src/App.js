@@ -3,7 +3,6 @@ import "./App.css";
 import HomePage from "./pages/HomePage";
 import CustomerLogin from "./pages/CustomerLogin";
 import DriverLogin from "./pages/DriverLogin";
-// s CustomerPage from './pages/CustomerPage';
 import "bootstrap/dist/css/bootstrap.min.css";
 import CustomerPage from "./pages/CustomerPage";
 import AdminLogin from "./pages/AdminLogin";

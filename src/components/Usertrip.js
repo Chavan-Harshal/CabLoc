@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Axios from "axios";
 import ReactNotification, { store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
-import "./UserTrip.css";
 import { StarRating } from "baseui/rating";
 
 class UserLocation extends Component {
