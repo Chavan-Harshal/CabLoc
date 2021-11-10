@@ -31,7 +31,7 @@ router.post("/login", async (req, res) => {
       } else {
         if (op.length === 0) {
           console.log("yes");
-          return res.status(200).json({ msg: "Invalid creds" });
+          return res.status(404).json({ msg: "Invalid creds" });
         } else {
           return res.status(200).json({ msg: "Success", data: op });
         }
