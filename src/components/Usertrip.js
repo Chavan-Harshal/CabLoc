@@ -37,11 +37,13 @@ class UserLocation extends Component {
         console.log(e);
       });
   };
-  getInput1 = (val, loc) => {
-    console.log(val);
-    console.log(this.state);
+  getInput1 = (e) => {
+    console.log("helksdfjl");
+    console.log(e.target.value);
+    const loc = this.parseZip(e.target.value);
+    console.log(loc);
     this.setState({
-      start: val,
+      start: e.target.value,
       startN: loc,
     });
   };
@@ -49,7 +51,7 @@ class UserLocation extends Component {
   getTaxi = () => {
     console.log("heelo nikita");
     Axios({
-      method: "get",
+      method: "post",
       url: "http://localhost:5000/customer/getnearby",
       data: {
         start: this.state.start,
@@ -68,9 +70,13 @@ class UserLocation extends Component {
       });
   };
 
-  getInput2 = (val, loc) => {
+  getInput2 = (e) => {
+    console.log("helksdfjl");
+    console.log(e.target.value);
+    const loc = this.parseZip(e.target.value);
+    console.log(loc);
     this.setState({
-      end: val,
+      end: e.target.value,
       endN: loc,
     });
   };
@@ -183,9 +189,9 @@ class UserLocation extends Component {
     localStorage.setItem("last", trip_id);
     Axios({
       method: "post",
-      url: "http://localhost:5000/api/booktrip",
+      url: "http://localhost:5000/customer/booktrip",
       data: {
-        user_id: this.props.data,
+        user_id: localStorage.getItem("userId"),
         taxi_id: taxi,
         from_s: this.state.start,
         to_d: this.state.end,
@@ -242,12 +248,13 @@ class UserLocation extends Component {
   };
 
   parseZip = (z) => {
-    const name = this.state.location.map((val, k) => {
-      if (val.zipcode === z) {
-        return val.loc_name;
+    console.log(this.state.location);
+    for (let i = 0; i < this.state.location.length; i++) {
+      if (this.state.location[i].zipcode == z) {
+        return this.state.location[i].loc_name;
       }
-    });
-    return name;
+    }
+    return "not found";
   };
 
   done = () => {
@@ -314,16 +321,18 @@ class UserLocation extends Component {
                 <label class="input-group-text" for="inputGroupSelect01">
                   Source
                 </label>
-                <select class="form-select" id="inputGroupSelect01">
+                <select
+                  class="form-select"
+                  id="inputGroupSelect01"
+                  // value={this.state.start}
+                  onChange={this.getInput1}
+                >
                   <option selected>Choose...</option>
                   {this.state.location.map((val, k) => {
                     return (
-                      <option
-                        onClick={() =>
-                          this.getInput1(val.zipcode, val.loc_name)
-                        }
-                      >
+                      <option value={val.zipcode}>
                         {val.loc_name}
+                        {/* {val.zipcode} */}
                       </option>
                     );
                   })}
@@ -333,16 +342,18 @@ class UserLocation extends Component {
                 <label class="input-group-text" for="inputGroupSelect01">
                   Destination
                 </label>
-                <select class="form-select" id="inputGroupSelect01">
+                <select
+                  class="form-select"
+                  id="inputGroupSelect01"
+                  // value={this.state.start}
+                  onChange={this.getInput2}
+                >
                   <option selected>Choose...</option>
                   {this.state.location.map((val, k) => {
                     return (
-                      <option
-                        onClick={() =>
-                          this.getInput2(val.zipcode, val.loc_name)
-                        }
-                      >
+                      <option value={val.zipcode}>
                         {val.loc_name}
+                        {/* {val.zipcode} */}
                       </option>
                     );
                   })}
@@ -374,6 +385,7 @@ class UserLocation extends Component {
                   ></button>
                 </div>
                 <div className="modal-body">
+                  {console.log(this.state.nearby)}
                   {this.state.nearby.map((val, k) => {
                     return (
                       <div>
