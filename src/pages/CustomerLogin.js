@@ -40,7 +40,7 @@ class CustomerLogin extends Component {
       pass: this.state.pass,
     };
     console.log(data);
-    axios.post(BACKEND_URL + "/login", data).then((res) => {
+    axios.post(BACKEND_URL + "/api/login", data).then((res) => {
       if (res.status === 200) {
         this.props.history.push("/CustomerPage");
       }

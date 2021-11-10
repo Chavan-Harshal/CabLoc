@@ -25,7 +25,7 @@ class UserLocation extends Component {
   componentDidMount = async () => {
     await Axios({
       method: "get",
-      url: "http://localhost:5000/getlocation",
+      url: "http://localhost:5000/customer/getlocation",
     })
       .then((res) => {
         console.log(res);
@@ -38,6 +38,7 @@ class UserLocation extends Component {
       });
   };
   getInput1 = (val, loc) => {
+    console.log(val);
     console.log(this.state);
     this.setState({
       start: val,
@@ -46,9 +47,10 @@ class UserLocation extends Component {
   };
 
   getTaxi = () => {
+    console.log("heelo nikita");
     Axios({
       method: "get",
-      url: "http://localhost:5000/api/getnearby",
+      url: "http://localhost:5000/customer/getnearby",
       data: {
         start: this.state.start,
       },

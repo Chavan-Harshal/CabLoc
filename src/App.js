@@ -8,6 +8,7 @@ import CustomerPage from "./pages/CustomerPage";
 import AdminLogin from "./pages/AdminLogin";
 import AdminPage from "./pages/AdminPage";
 import DriverPage from "./pages/DriverPage";
+import UserLocation from "./components/Usertrip";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route exact path="/AdminLogin" component={AdminLogin} />
         <Route exact path="/AdminPage" component={AdminPage} />
         <Route exact path="/DriverPage" component={DriverPage} />
+        <Route exact path="/UserTrip" component={UserLocation} />
       </BrowserRouter>
     </div>
   );
