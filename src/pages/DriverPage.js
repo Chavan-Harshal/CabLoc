@@ -33,7 +33,7 @@ class DriverPage extends Component {
   getloc = () => {
     axios({
       method: "post",
-      url: "http://localhost:5000/api/mylocation",
+      url: "http://localhost:5000/driver/mylocation",
       data: {
         driver_id: localStorage.getItem("driverId"),
       },
@@ -57,8 +57,15 @@ class DriverPage extends Component {
         driver_id: localStorage.getItem("driverId"),
       },
     }).then((res) => {
-      console.log(res.data);
+      console.log(res.data.data);
       console.log("hello");
+      this.setState({
+        driver_id: res.data.data[0].driver_id,
+        d_name: res.data.data[0].d_name,
+        d_phone_no: res.data.data[0].d_phone_no,
+        taxi_id: res.data.data[0].taxi_id,
+        rating: res.data.data[0].rating,
+      });
     });
 
     await axios;
@@ -81,7 +88,7 @@ class DriverPage extends Component {
 
     await axios({
       method: "post",
-      url: "http://localhost:5000/api/getshift",
+      url: "http://localhost:5000/driver/getshift",
       data: {
         driver_id: localStorage.getItem("driverId"),
       },
@@ -98,7 +105,7 @@ class DriverPage extends Component {
   decline = (trip_id) => {
     axios({
       method: "post",
-      url: "http://localhost:5000/api/decline",
+      url: "http://localhost:5000/driver/decline",
       data: {
         trip_id: trip_id,
       },
@@ -128,7 +135,7 @@ class DriverPage extends Component {
   getuser = async (user_id) => {
     const resp = await axios({
       method: "post",
-      url: "http://localhost:5000/api/getuser",
+      url: "http://localhost:5000/driver/getuser",
       data: {
         user_id: user_id,
       },
@@ -137,7 +144,7 @@ class DriverPage extends Component {
         console.log(res);
         const data = {
           name: res.data.data[0].name,
-          phone: res.data.data[0].phone,
+          phone: res.data.data[0].phone_no,
         };
         console.log(data);
         return data;
@@ -152,27 +159,58 @@ class DriverPage extends Component {
   gettrips = async () => {
     await axios({
       method: "post",
-      url: "http://localhost:5000/api/getrequests",
+      url: "http://localhost:5000/driver/getrequests",
       data: {
         taxi_id: this.state.taxi_id,
       },
     })
       .then(async (res) => {
-        console.log(res);
+        console.log(res.data.data[0].r[0].from_s);
         const data = res.data.data;
-        await data.map(async (val, k) => {
-          const userVal = await this.getuser(val.r[0].user_id);
-          // if(val.r[0].from_s == c){
-          //     // this.decline(val.r[0].trip_id)
-          //     tripDetails.push(val)
-          // }
+        let tripd = [];
+        for (let i = 0; i < res.data.data.length; i++) {
+          let d = {};
+          // var dict = {
+          //   key1: "value1",
+          //   key2: "value2"
+          //   // etc.
+          // };
+          // d = {
+          d["from_s"] = res.data.data[i].r[0].from_s;
+
+          d["to_d"] = res.data.data[i].r[0].to_d;
+
+          d["trip_id"] = res.data.data[i].r[0].trip_id;
+
+          d["user_id"] = res.data.data[i].r[0].user_id;
+
+          console.log(d);
+          const userVal = await this.getuser(d["user_id"]);
           console.log(userVal);
-          val.r.push(userVal);
-          val.r[0].user = userVal.name;
-          val.r[0].phone = userVal.phone;
-        });
+          d["name"] = userVal.name;
+          console.log(userVal.phone_no);
+          d["phone"] = userVal.phone;
+          console.log(d);
+          tripd.push(d);
+          // tripd[i]["from_s"].push(res.data.data[i].r[0].from_s);
+          // tripd[i]["to_d"] = res.data.data[i].r[0].to_d;
+          // tripd[i]["trip_"] = res.data.data[i].r[0].trip_id;
+          // tripd[i]["user_id"] = res.data.data[i].r[0].user_id;
+        }
+        // await data.map(async (val, k) => {
+        //   const userVal = await this.getuser(val.r[1].user_id);
+        //   // if(val.r[0].from_s == c){
+        //   //     // this.decline(val.r[0].trip_id)
+        //   //     tripDetails.push(val)
+        //   // }
+        //   console.log(userVal);
+        //   val.r.push(userVal);
+        //   val.r[1].user = userVal.name;
+        //   val.r[1].phone = userVal.phone;
+        // });
+
         await this.setState({
-          tripDetails: data,
+          tripDetails: tripd,
         });
       })
       .catch((e) => {
@@ -193,7 +231,7 @@ class DriverPage extends Component {
   approve = (trip) => {
     axios({
       method: "post",
-      url: "http://localhost:5000/api/approve",
+      url: "http://localhost:5000/driver/approve",
       data: {
         trip_id: trip,
         start: "09:10:00",
@@ -263,20 +301,26 @@ class DriverPage extends Component {
             <h3>Hello {localStorage.getItem("driverName")}</h3>
             <hr class="w-100" />
             <div className="location">
-              <button type="button" class="btn btn-outline-dark">
+              <button
+                type="button"
+                class="btn btn-outline-dark"
+                onClick={this.getloc}
+              >
                 Current Location
               </button>
               {this.state && this.state.myloc ? (
+                // <div style={{ height: "10px", width: "10px" }}>
                 <h3 className="text-light">
-                  <img
+                  {/* <img
                     alt="loc"
                     src="https://i.pinimg.com/originals/29/93/fd/2993fd151e2e1cab871aec155e22cbcc.png"
-                    height="40px"
-                    width="40px"
-                  ></img>{" "}
-                  {this.state.myloc}
+                    height="10px"
+                    width="10px"
+                  ></img>{" "} */}
+                  <div style={{ color: "black" }}>{this.state.myloc}</div>
                 </h3>
               ) : (
+                // </div>
                 <h6>Set Location Please</h6>
               )}
             </div>
@@ -409,15 +453,9 @@ class DriverPage extends Component {
                       this.state.tripDetails.map((val, k) => {
                         return (
                           <div>
-                            <h6>Trip ID: {val.r[0].user_id}</h6>
-                            <h6>
-                              {val.r[0].user && <h6>Name: {val.r[0].user}</h6>}
-                            </h6>
-                            <h6>
-                              {val.r[0].phone && (
-                                <h6>Phone No: {val.r[0].phone}</h6>
-                              )}
-                            </h6>
+                            <h6>Trip ID: {val.trip_id}</h6>
+                            <h6>Name: {val.name}</h6>
+                            <h6>Phone No: {val.phone}</h6>
                             <button
                               type="button"
                               class="btn btn-outline-dark"
@@ -425,10 +463,7 @@ class DriverPage extends Component {
                               data-bs-toggle="modal"
                               data-bs-target="#myModal"
                               onClick={() => {
-                                this.curtrip(
-                                  val.r[0].trip_id,
-                                  val.r[0].user_id
-                                );
+                                this.curtrip(val.trip_id, val.user_id);
                               }}
                             >
                               Approve

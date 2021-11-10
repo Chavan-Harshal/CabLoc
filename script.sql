@@ -6,7 +6,7 @@ CREATE TABLE user1 (
 
 CREATE TABLE user2 (
     user_id varchar(20), 
-    phono_no varchar(10), 
+    phone_n varchar(10), 
     PRIMARY KEY (user_id)
 );
 
