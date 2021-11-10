@@ -39,7 +39,7 @@ CREATE TABLE taxi1 (
     taxi_id varchar(20),
     color varchar(20),
     number int,
-    driver_id int,
+    driver_id varchar(20),
     model varchar(20),
     PRIMARY KEY (taxi_id)
     -- FOREIGN KEY (driver_id) REFERENCES driver1(driver_id)
@@ -121,7 +121,7 @@ CREATE TABLE trip3 (
     FOREIGN KEY (user_id) REFERENCES user1(user_id)
 );
 
-CREATE TABLE trips4(
+CREATE TABLE trip4(
     trip_id varchar(20),
     rating int,
     status varchar(10),
@@ -135,9 +135,9 @@ CREATE TABLE trips4(
 CREATE TABLE books (
     user_id varchar(20),
     trip_id varchar(20),
-    PRIMARY KEY(user_id, trip_id),
-    FOREIGN KEY (user_id) REFERENCES user1(user_id),
-    FOREIGN KEY (trip_id) REFERENCES trip1(trip_id)
+    PRIMARY KEY(user_id, trip_id)
+    -- FOREIGN KEY (user_id) REFERENCES user1(user_id),
+    -- FOREIGN KEY (trip_id) REFERENCES trip1(trip_id)
 );
 
 CREATE TABLE works (

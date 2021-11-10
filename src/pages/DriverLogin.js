@@ -33,10 +33,14 @@ class DriverLogin extends Component {
       pass: this.state.pass,
     };
     console.log(data);
+    localStorage.clear();
     axios.post(BACKEND_URL + "/api/driverlogin", data).then((res) => {
       console.log(res);
       if (res.status === 200) {
         this.props.history.push("/DriverPage");
+        localStorage.clear();
+        localStorage.setItem("driverID", this.state.pass);
+        localStorage.setItem("driverName", this.state.name);
       }
     });
   };

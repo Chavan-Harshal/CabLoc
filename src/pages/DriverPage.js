@@ -16,12 +16,35 @@ import ReactNotification, { store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 
 class DriverPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      d_name: "",
+      // pass: "",
+      driver_id: "",
+      d_phone_no: "",
+      taxi_id: "",
+      rating: "",
+      myloc: "",
+      code: "",
+      taxi: [],
+      shifts: "",
+      tripDetails: "",
+      request: false,
+      c: "",
+      user: "",
+      modal: false,
+      detail: false,
+      fare: "",
+      duration: "",
+    };
+  }
   getloc = () => {
     axios({
       method: "post",
       url: "http://localhost:5000/api/mylocation",
       data: {
-        driver_id: this.props.data.driver_id,
+        driver_id: localStorage.getItem("driverId"),
       },
     })
       .then((res) => {
@@ -38,9 +61,21 @@ class DriverPage extends Component {
   componentDidMount = async () => {
     await axios({
       method: "post",
+      url: "http://localhost:5000/driver/getme",
+      data: {
+        driver_id: localStorage.getItem("driverId"),
+      },
+    }).then((res) => {
+      console.log(res.data);
+      console.log("hello");
+    });
+
+    await axios;
+    await axios({
+      method: "post",
       url: "http://localhost:5000/gettaxi",
       data: {
-        driver_id: this.props.data.driver_id,
+        driver_id: localStorage.getItem("driverId"),
       },
     })
       .then((res) => {
@@ -57,7 +92,7 @@ class DriverPage extends Component {
       method: "post",
       url: "http://localhost:5000/api/getshift",
       data: {
-        driver_id: this.props.data.driver_id,
+        driver_id: localStorage.getItem("driverId"),
       },
     }).then((res) => {
       console.log(res);
@@ -128,7 +163,7 @@ class DriverPage extends Component {
       method: "post",
       url: "http://localhost:5000/api/getrequests",
       data: {
-        taxi_id: this.state.taxi.data[0].taxi_id,
+        taxi_id: this.state.taxi_id,
       },
     })
       .then(async (res) => {
@@ -253,7 +288,7 @@ class DriverPage extends Component {
                   width="200px"
                 ></img>
                 <br></br>
-                <h2>Hello {this.props.data.d_name}</h2>
+                <h2>Hello {localStorage.getItem("driverName")}</h2>
               </div>
 
               <CardTitle>
@@ -265,11 +300,11 @@ class DriverPage extends Component {
               </CardTitle>
               <ListGroup>
                 <ListGroupItem className="text-dark list-group-item list-group-item-action list-group-item-light">
-                  <b>Name :</b> {this.props.data.d_name}
+                  <b>Name :</b> {localStorage.getItem("driverName")}
                 </ListGroupItem>
                 <ListGroupItem className="text-dark list-group-item list-group-item-action list-group-item-light">
                   <b>Phone Number: </b>
-                  {this.props.data.d_phone_no}{" "}
+                  {this.state.d_phone_no}{" "}
                 </ListGroupItem>
                 <ListGroupItem className="text-dark list-group-item list-group-item-action list-group-item-light">
                   <div
@@ -310,7 +345,7 @@ class DriverPage extends Component {
                   </div>
                 </ListGroupItem>
                 <ListGroupItem className="text-dark list-group-item list-group-item-action list-group-item-lighty">
-                  {/* <Location driver = {this.props.data.driver_id}/>     */}
+                  {/* <Location driver = {localStorage.getItem("driverId")}/>     */}
                 </ListGroupItem>
               </ListGroup>
             </Card>
@@ -349,7 +384,7 @@ class DriverPage extends Component {
               width="400px"
             ></img>
             <div className="ml-5">
-              {this.state && (
+              {/* {this.state && (
                 <h3>
                   <h4 className="display-4">
                     Volkswagen Vento<br></br>
@@ -358,7 +393,7 @@ class DriverPage extends Component {
                   <br></br>Color : {this.state.taxi.data[0].color} <br></br>
                   Number : {this.state.taxi.data[0].number}
                 </h3>
-              )}
+              )} */}
             </div>
           </div>
 

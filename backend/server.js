@@ -7,6 +7,7 @@ const connection = require("./connection");
 const router = require("./routes/loginreg");
 const adminroute = require("./routes/admin");
 const customerroute = require("./routes/customer");
+const driverroute = require("./routes/driver");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
@@ -18,3 +19,4 @@ app.listen(port, () => {
 app.use("/api", router);
 app.use("/admin", adminroute);
 app.use("/customer", customerroute);
+app.use("/driver", driverroute);
