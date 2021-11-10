@@ -189,3 +189,8 @@ CREATE TABLE contains (
     FOREIGN KEY (garage_id) REFERENCES garage(garage_id)
 );
 
+CREATE TABLE ongoing (
+    user_id varchar(20),
+    trip_id varchar(20),
+    PRIMARY KEY(user_id, trip_id)
+);

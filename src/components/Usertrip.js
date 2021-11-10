@@ -85,7 +85,7 @@ class UserLocation extends Component {
     console.log(trip);
     await Axios({
       method: "post",
-      url: "http://localhost:5000/api/curtrip",
+      url: "http://localhost:5000/customer/curtrip",
       data: {
         trip_id: trip,
       },
@@ -104,7 +104,7 @@ class UserLocation extends Component {
     if (localStorage.getItem("last") === null) {
       await Axios({
         method: "post",
-        url: "http://localhost:5000/api/getongoing",
+        url: "http://localhost:5000/customer/getongoing",
         data: {
           user_id: this.state.user_id,
         },
@@ -119,7 +119,7 @@ class UserLocation extends Component {
     }
     Axios({
       method: "post",
-      url: "http://localhost:5000/api/checkstatus",
+      url: "http://localhost:5000/customer/checkstatus",
       data: {
         user_id: this.state.user_id,
         trip_id: localStorage.getItem("last"),
@@ -264,7 +264,7 @@ class UserLocation extends Component {
     };
     Axios({
       method: "post",
-      url: "http://localhost:5000/api/setrating",
+      url: "http://localhost:5000/customer/setrating",
       data: data,
     })
       .then((res) => {
@@ -421,7 +421,11 @@ class UserLocation extends Component {
               </div>
             </div>
           </div>
-          <button type="button" class="btn btn-outline-dark">
+          <button
+            type="button"
+            class="btn btn-outline-dark"
+            onClick={this.getReq}
+          >
             Check trip requests
           </button>
           {this.state.approved && (

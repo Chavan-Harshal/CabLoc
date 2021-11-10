@@ -12,7 +12,7 @@ class CustomerPage extends Component {
     this.state = {
       user_id: localStorage.getItem("userId"),
       user_name: localStorage.getItem("userName"),
-      location: [],
+      location: {},
       trips: [],
     };
   }
@@ -23,17 +23,17 @@ class CustomerPage extends Component {
       url: BACKEND_URL + "/customer/getlocnames",
     })
       .then(async (res) => {
-        console.log(res);
-        let lookup = {};
-        await res.data.location.map((val, k) => {
-          lookup[val.zipcode] = val.loc_name;
-        });
-        console.log(lookup);
+        console.log(res.data.data);
+        const loc = {};
+        for (let i = 0; i < res.data.data.length; i++) {
+          loc[res.data.data[i].zipcode] = res.data.data[i].loc_name;
+        }
         this.setState({
-          location: lookup,
+          location: loc,
         });
       })
       .catch((e) => {
+        console.log("error here");
         console.log(e);
       });
     await Axios({
@@ -44,7 +44,8 @@ class CustomerPage extends Component {
       },
     })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
+        console.log("hekldsjf");
         this.setState({
           trips: res.data.data,
         });
@@ -52,6 +53,8 @@ class CustomerPage extends Component {
       .catch((e) => {
         console.log(e);
       });
+
+    console.log(this.state.location);
   }
 
   render() {
@@ -107,12 +110,8 @@ class CustomerPage extends Component {
                           <tbody>
                             <tr>
                               <td>{k + 1}</td>
-                              <td>
-                                {this.state.location[val.from_s.toString()]}
-                              </td>
-                              <td>
-                                {this.state.location[val.to_d.toString()]}
-                              </td>
+                              <td>{this.state.location[val.from_s]}</td>
+                              <td>{this.state.location[val.to_d]}</td>
                               <td>{val.fare}</td>
                             </tr>
                           </tbody>
