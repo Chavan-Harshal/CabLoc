@@ -1,16 +1,7 @@
 import React, { Component } from "react";
 import AppNavbar from "../components/AppNavbar";
-import {
-  ListGroup,
-  ListGroupItem,
-  CardTitle,
-  Jumbotron,
-  Input,
-} from "reactstrap";
 import axios from "axios";
 import { StarRating } from "baseui/rating";
-import { Card } from "baseui/card";
-import { Modal, ModalHeader, ModalFooter, ModalBody } from "baseui/modal";
 import "./DriverPage.css";
 import ReactNotification, { store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
@@ -261,225 +252,219 @@ class DriverPage extends Component {
     return (
       <div class="DriverPage1">
         <AppNavbar />
-        <div className="lead">
-          <ReactNotification />
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Card className="w-1000" body inverse>
-              <div
-                class="driverProfile"
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <img
-                  alt="profile"
-                  src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png"
-                  height="200px"
-                  width="200px"
-                ></img>
-                <br></br>
-                <h2>Hello {localStorage.getItem("driverName")}</h2>
-              </div>
 
-              <CardTitle>
-                <h2 className="display-3">
-                  <h3>
-                    <b>My Profile</b>
-                  </h3>
-                </h2>
-              </CardTitle>
-              <ListGroup>
-                <ListGroupItem className="text-dark list-group-item list-group-item-action list-group-item-light">
-                  <b>Name :</b> {localStorage.getItem("driverName")}
-                </ListGroupItem>
-                <ListGroupItem className="text-dark list-group-item list-group-item-action list-group-item-light">
-                  <b>Phone Number: </b>
-                  {this.state.d_phone_no}{" "}
-                </ListGroupItem>
-                <ListGroupItem className="text-dark list-group-item list-group-item-action list-group-item-light">
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <button class="btn btn-outline-secondary btn-lg mr-1">
-                      Get Current Location
-                    </button>
-                    {this.state && this.state.myloc ? (
-                      <h3 className="text-light">
-                        <img
-                          alt="loc"
-                          src="https://i.pinimg.com/originals/29/93/fd/2993fd151e2e1cab871aec155e22cbcc.png"
-                          height="40px"
-                          width="40px"
-                        ></img>{" "}
-                        {this.state.myloc}
-                      </h3>
-                    ) : (
-                      <button class="btn btn-outline-secondary btn-lg">
-                        Set My Loaction
-                      </button>
-                    )}
-                  </div>
-                </ListGroupItem>
-                <ListGroupItem className="text-dark list-group-item list-group-item-action list-group-item-light">
-                  <b>Rating: </b>
-                  <StarRating></StarRating>
-                </ListGroupItem>
-                <ListGroupItem className="text-dark list-group-item list-group-item-action list-group-item-light">
-                  <div>
-                    <b>My Shift:</b>
-                  </div>
-                </ListGroupItem>
-                <ListGroupItem className="text-dark list-group-item list-group-item-action list-group-item-lighty">
-                  {/* <Location driver = {localStorage.getItem("driverId")}/>     */}
-                </ListGroupItem>
-              </ListGroup>
-            </Card>
-          </div>
-        </div>
-        <div>
-          <div class="trip">
+        <ReactNotification />
+        <div className="Driver">
+          <div class="jumbotron">
+            <img
+              alt="avatar"
+              src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png"
+            />
+            <h3>Hello {localStorage.getItem("driverName")}</h3>
+            <hr class="w-100" />
+            <div className="location">
+              <button type="button" class="btn btn-outline-dark">
+                Current Location
+              </button>
+              {this.state && this.state.myloc ? (
+                <h3 className="text-light">
+                  <img
+                    alt="loc"
+                    src="https://i.pinimg.com/originals/29/93/fd/2993fd151e2e1cab871aec155e22cbcc.png"
+                    height="40px"
+                    width="40px"
+                  ></img>{" "}
+                  {this.state.myloc}
+                </h3>
+              ) : (
+                <h6>Set Location Please</h6>
+              )}
+            </div>
+
+            <hr class="w-100" />
+            <b>
+              My Shift:{" "}
+              {this.state && this.state.shifts && (
+                <h4>
+                  {this.state.shifts[0].start} to {this.state.shifts[0].end}
+                </h4>
+              )}{" "}
+            </b>
+            <hr class="w-100" />
             <button
-              class="btn btn-secondary btn-lg"
+              type="button"
+              class="btn btn-outline-dark"
+              data-bs-toggle="modal"
+              data-bs-target="#myModal1"
               onClick={() => {
                 this.gettrips();
-                this.modalOpen();
               }}
             >
-              Get Trip Requests
+              Trip Requests
             </button>
-          </div>
-          <h3>
-            <b>My Taxi</b>
-          </h3>
-          <br></br>
-          <div
-            className="mt-0 pt-0"
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <img
-              alt="car"
-              className="mr-5"
-              src="https://img2.pngio.com/white-sedan-illustration-transparent-png-svg-vector-file-white-sedan-car-png-512_512.png"
-              height="400px"
-              width="400px"
-            ></img>
-            <div className="ml-5">
-              {/* {this.state && (
-                <h3>
-                  <h4 className="display-4">
-                    Volkswagen Vento<br></br>
-                  </h4>
-                  Type: {this.state.taxi.data[0].model}
-                  <br></br>Color : {this.state.taxi.data[0].color} <br></br>
-                  Number : {this.state.taxi.data[0].number}
-                </h3>
-              )} */}
+            <hr class="w-100" />
+            <button
+              type="button"
+              class="btn btn-outline-dark"
+              data-bs-toggle="modal"
+              data-bs-target="#myModal2"
+            >
+              My Taxi
+            </button>
+
+            <div id="myModal" class="modal fade" role="dialog" tabIndex="-1">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Approve the trip</h4>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div className="modal-body">
+                    <h6>Trip ID: {this.state && this.state.c}</h6>
+                    <h6>
+                      Fare{" "}
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter fare"
+                        onChange={this.getfare}
+                      />
+                    </h6>
+                    <h6>
+                      Duration{" "}
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter Duration (HH:MM:SS)"
+                        onChange={this.getduration}
+                      />
+                    </h6>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-outline-danger"
+                      data-bs-dismiss="modal"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-outline-dark"
+                      data-bs-dismiss="modal"
+                      onClick={() =>
+                        this.approve(this.state.c, this.state.user)
+                      }
+                    >
+                      Approve
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="myModal2" class="modal fade" role="dialog" tabIndex="-1">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">My Taxi</h4>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div className="modal-body">
+                    <img
+                      alt="car"
+                      src="https://img2.pngio.com/white-sedan-illustration-transparent-png-svg-vector-file-white-sedan-car-png-512_512.png"
+                    ></img>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="myModal1" class="modal fade" role="dialog" tabIndex="-1">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Active Trip Requests</h4>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div className="modal-body">
+                    {this.state &&
+                    this.state.request &&
+                    this.state.tripDetails ? (
+                      this.state.tripDetails.map((val, k) => {
+                        return (
+                          <div>
+                            <h6>Trip ID: {val.r[0].user_id}</h6>
+                            <h6>
+                              {val.r[0].user && <h6>Name: {val.r[0].user}</h6>}
+                            </h6>
+                            <h6>
+                              {val.r[0].phone && (
+                                <h6>Phone No: {val.r[0].phone}</h6>
+                              )}
+                            </h6>
+                            <button
+                              type="button"
+                              class="btn btn-outline-dark"
+                              data-bs-dismiss="modal"
+                              data-bs-toggle="modal"
+                              data-bs-target="#myModal"
+                              onClick={() => {
+                                this.curtrip(
+                                  val.r[0].trip_id,
+                                  val.r[0].user_id
+                                );
+                              }}
+                            >
+                              Approve
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-outline-danger"
+                              data-bs-dismiss="modal"
+                              onClick={() =>
+                                this.decline(val.r[0].trip_id, val.r[0].user_id)
+                              }
+                            >
+                              Reject
+                            </button>
+                          </div>
+                        );
+                      })
+                    ) : (
+                      <div>
+                        <h3>No Active Requests</h3>
+                      </div>
+                    )}
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-outline-danger"
+                      data-bs-dismiss="modal"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-
-          <Modal
-            isOpen={this.state && this.state.detail}
-            onClose={this.detailtoggle}
-          >
-            <ModalHeader onClose={this.detailtoggle}>
-              Approve the trip
-            </ModalHeader>
-            <ModalBody>
-              <h3 className="lead">Trip ID: {this.state && this.state.c}</h3>
-              <h3 className="lead">
-                Enter Fare<Input onChange={this.getfare}></Input>
-              </h3>
-              <h3 className="lead">
-                Enter Duration(HH:MM:SS)
-                <Input onChange={this.getduration}></Input>
-              </h3>
-            </ModalBody>
-            <ModalFooter>
-              <button
-                class="btn btn-outline-secondary btn-lg"
-                onClick={this.detailtoggle}
-              >
-                Cancel
-              </button>
-              <button
-                class="btn btn-outline-secondary btn-lg"
-                onClick={() => this.approve(this.state.c, this.state.user)}
-              >
-                Approve
-              </button>
-            </ModalFooter>
-          </Modal>
-          <Modal
-            isOpen={this.state && this.state.modal}
-            onClose={this.modalOpen}
-          >
-            <ModalHeader toggle={this.modalOpen}>
-              Active Trip Requests
-            </ModalHeader>
-            <ModalBody>
-              {this.state && this.state.request && this.state.tripDetails ? (
-                this.state.tripDetails.map((val, k) => {
-                  return (
-                    <div>
-                      <h3>Trip ID: {val.r[0].user_id}</h3>
-                      <h3>{val.r[0].user && <h3>Name: {val.r[0].user}</h3>}</h3>
-                      <h3>
-                        {val.r[0].phone && <h3>Phone No: {val.r[0].phone}</h3>}
-                      </h3>
-                      <button
-                        class="btn btn-outline-secondary btn-lg"
-                        onClick={() => {
-                          this.curtrip(val.r[0].trip_id, val.r[0].user_id);
-                          this.detailtoggle();
-                        }}
-                      >
-                        Approve
-                      </button>
-                      <button
-                        class="btn btn-outline-secondary btn-lg"
-                        className="text-dark"
-                        onClick={() =>
-                          this.decline(val.r[0].trip_id, val.r[0].user_id)
-                        }
-                      >
-                        Reject
-                      </button>
-                    </div>
-                  );
-                })
-              ) : (
-                <h1>No Active Requests</h1>
-              )}
-            </ModalBody>
-            <ModalFooter>
-              <button
-                class="btn btn-outline-secondary btn-lg"
-                onClick={this.modalOpen}
-              >
-                Cancel
-              </button>
-            </ModalFooter>
-          </Modal>
         </div>
       </div>
     );

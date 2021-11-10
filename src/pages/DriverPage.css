@@ -1,26 +1,31 @@
-html{
-    scroll-behavior: smooth
-}
-.DriverPage {
+.DriverPage1 {
     background-image: url("https://images.unsplash.com/photo-1582820795651-f358eebe4406?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=871&q=80");
     font-family: "Times New Roman", Times, serif;
     background-size: cover;
-    height: 200vh;
+    height: 100vh;
 }
 
-.DriverPage{
+.Driver {
     background-color: rgb(0, 0, 0, 0.7);
+  }
+
+.modal-body input {
+    margin-bottom: 10px;
 }
 
-.lead{
-    padding-top: 60px;
-    
+.jumbotron hr{
+    border-top: 3px solid #bbb;
+} 
+
+.location {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
-button{
-    margin: 8px;
+.location h6 {
+    margin-left: 20px;
+    margin-top: 10px;
 }
-.trip{
-    padding-top: 40px;
-   padding-bottom: 40px;
-}
+
