@@ -18,7 +18,7 @@ class DriverPage extends Component {
       rating: "",
       myloc: "",
       code: "",
-      taxi: [],
+      taxi: {},
       shifts: "",
       tripDetails: "",
       request: false,
@@ -71,15 +71,28 @@ class DriverPage extends Component {
     await axios;
     await axios({
       method: "post",
-      url: "http://localhost:5000/gettaxi",
+      url: "http://localhost:5000/driver/gettaxi",
       data: {
         driver_id: localStorage.getItem("driverId"),
       },
     })
-      .then((res) => {
+      .then(async (res) => {
         console.log(res);
-        this.setState({
-          taxi: res.data,
+        console.log(res.data.data[0].driver_id);
+        let a = {};
+        //         color: "black"
+        // driver_id: "88874"
+        // model: "sedan"
+        // number: 1000
+        // taxi_id: "tx97170"
+        a["color"] = res.data.data[0].color;
+        a["driver_id"] = res.data.data[0].driver_id;
+        a["model"] = res.data.data[0].modal;
+        a["number"] = res.data.data[0].number;
+        a["taxi_id"] = res.data.data[0].taxi_id;
+        console.log(a);
+        await this.setState({
+          taxi: a,
         });
       })
       .catch((e) => {
@@ -98,7 +111,7 @@ class DriverPage extends Component {
         shifts: res.data.shifts,
       });
     });
-
+    console.log(this.state.taxi);
     await this.getloc();
   };
 
@@ -170,12 +183,7 @@ class DriverPage extends Component {
         let tripd = [];
         for (let i = 0; i < res.data.data.length; i++) {
           let d = {};
-          // var dict = {
-          //   key1: "value1",
-          //   key2: "value2"
-          //   // etc.
-          // };
-          // d = {
+
           d["from_s"] = res.data.data[i].r[0].from_s;
 
           d["to_d"] = res.data.data[i].r[0].to_d;
@@ -186,28 +194,10 @@ class DriverPage extends Component {
 
           console.log(d);
           const userVal = await this.getuser(d["user_id"]);
-          console.log(userVal);
           d["name"] = userVal.name;
-          console.log(userVal.phone_no);
           d["phone"] = userVal.phone;
-          console.log(d);
           tripd.push(d);
-          // tripd[i]["from_s"].push(res.data.data[i].r[0].from_s);
-          // tripd[i]["to_d"] = res.data.data[i].r[0].to_d;
-          // tripd[i]["trip_"] = res.data.data[i].r[0].trip_id;
-          // tripd[i]["user_id"] = res.data.data[i].r[0].user_id;
         }
-        // await data.map(async (val, k) => {
-        //   const userVal = await this.getuser(val.r[1].user_id);
-        //   // if(val.r[0].from_s == c){
-        //   //     // this.decline(val.r[0].trip_id)
-        //   //     tripDetails.push(val)
-        //   // }
-        //   console.log(userVal);
-        //   val.r.push(userVal);
-        //   val.r[1].user = userVal.name;
-        //   val.r[1].phone = userVal.phone;
-        // });
 
         await this.setState({
           tripDetails: tripd,
@@ -425,6 +415,19 @@ class DriverPage extends Component {
                     ></button>
                   </div>
                   <div className="modal-body">
+                    <div className="ml-5">
+                      {this.state && (
+                        <h3>
+                          {/* {console.log(this.state.taxi)} */}
+                          <h4 className="display-4">
+                            Volkswagen Vento<br></br>
+                          </h4>
+                          Type: {this.state.taxi.model}
+                          <br></br>Color : {this.state.taxi.color} <br></br>
+                          Number : {this.state.taxi.number}
+                        </h3>
+                      )}
+                    </div>
                     <img
                       alt="car"
                       src="https://img2.pngio.com/white-sedan-illustration-transparent-png-svg-vector-file-white-sedan-car-png-512_512.png"
@@ -472,9 +475,7 @@ class DriverPage extends Component {
                               type="button"
                               class="btn btn-outline-danger"
                               data-bs-dismiss="modal"
-                              onClick={() =>
-                                this.decline(val.r[0].trip_id, val.r[0].user_id)
-                              }
+                              onClick={() => this.decline(val.user_id)}
                             >
                               Reject
                             </button>

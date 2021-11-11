@@ -9,7 +9,7 @@ class UserLocation extends Component {
     super(props);
     this.state = {
       location: [],
-      user_id: this.props.data,
+      user_id: localStorage.getItem("userId"),
       start: "",
       startN: "",
       end: "",
@@ -101,6 +101,16 @@ class UserLocation extends Component {
       });
   };
   getReq = async () => {
+    await Axios({
+      method: "post",
+      url: "http://localhost:5000/customer/getlast",
+      data: {
+        user_id: this.state.user_id,
+      },
+    }).then((res) => {
+      console.log(res);
+      localStorage.setItem("last", res.data);
+    });
     if (localStorage.getItem("last") === null) {
       await Axios({
         method: "post",

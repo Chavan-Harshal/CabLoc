@@ -6,7 +6,7 @@ CREATE TABLE user1 (
 
 CREATE TABLE user2 (
     user_id varchar(20), 
-    phone_n varchar(10), 
+    phone_no varchar(10), 
     PRIMARY KEY (user_id)
 );
 
@@ -193,4 +193,10 @@ CREATE TABLE ongoing (
     user_id varchar(20),
     trip_id varchar(20),
     PRIMARY KEY(user_id, trip_id)
+);
+
+create table last(
+    user_id varchar(20), 
+    trip_id varchar(20), 
+    PRIMARY KEY (user_id, trip_id)
 );

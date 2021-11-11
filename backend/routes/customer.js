@@ -31,10 +31,10 @@ router.post("/getnearby", async (req, res) => {
 router.post("/booktrip", async (req, res) => {
   const { user_id, taxi_id, from_s, to_d, trip_id } = req.body;
   let driver_id = "";
-  console.log(req.body);
+  // console.log(req.body);
   await connection.query(
-    `INSERT INTO trip3 values("${user_id}","${from_s}","${to_d}","${trip_id}");INSERT INTO trip2 values("${trip_id}","${from_s}","${to_d}","00:00:00",0);`,
-    [1, 2],
+    `INSERT INTO trip3 values("${user_id}","${from_s}","${to_d}","${trip_id}");INSERT INTO trip2 values("${trip_id}","${from_s}","${to_d}","00:00:00",0);INSERT INTO last values("${user_id}", "${trip_id}");`,
+    [1, 2, 3],
     (e, op) => {
       if (e) {
         console.log(e);
@@ -48,9 +48,9 @@ router.post("/booktrip", async (req, res) => {
       if (e) {
         return res.status(400).json({ msg: "Error" });
       } else {
-        console.log(op);
+        // console.log(op);
         driver_id = op[0].driver_id;
-        console.log(driver_id);
+        // console.log(driver_id);
         await connection.query(
           `INSERT INTO trip4 values("${trip_id}",1,FALSE,"${taxi_id}","${driver_id}")`,
           (e, op) => {
@@ -172,7 +172,7 @@ router.post("/checkstatus", (req, res) => {
           return res.status(200).json({ msg: "approved" });
         } else {
           connection.query(
-            `SELECT * FROM trip4 where trip_id="${trip_id}" and status=0`,
+            `SELECT * FROM trip4 where trip_id="${trip_id}" and status="0"`,
             (err, opt) => {
               if (err) {
                 console.log(err);
@@ -216,6 +216,17 @@ router.post("/setrating", (req, res) => {
       return res.status(200).json({ msg: "Updated" });
     }
   );
+});
+
+router.post("/getlast", (req, res) => {
+  const { user_id } = req.body;
+  connection.query(`select * from last where user_id="${user_id}"`, (e, op) => {
+    if (e) {
+      return res.status(404).json({ msg: "error" });
+    } else {
+      return res.status(200).json({ msg: "success", data: op });
+    }
+  });
 });
 
 module.exports = router;
