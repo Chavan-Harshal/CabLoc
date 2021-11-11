@@ -201,6 +201,8 @@ router.post("/approve", async (req, res) => {
 // Updates the drivers location
 router.post("/update", async (req, res) => {
   const { driver_id, zipcode } = req.body;
+  console.log("body")
+  console.log(req.body)
 
   connection.query(
     `UPDATE present_at set zipcode="${zipcode}" where driver_id="${driver_id}";UPDATE availability set zipcode="${zipcode}" WHERE taxi_id in (SELECT taxi_id from driver1 where driver_id ="${driver_id}")`,

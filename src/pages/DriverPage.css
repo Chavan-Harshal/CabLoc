@@ -29,3 +29,14 @@
     margin-top: 10px;
 }
 
+.taxi-location {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+}
+
+.location h5 {
+    margin-left: 20px;
+    margin-top: 10px;
+}

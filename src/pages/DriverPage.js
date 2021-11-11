@@ -5,6 +5,7 @@ import { StarRating } from "baseui/rating";
 import "./DriverPage.css";
 import ReactNotification, { store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
+import Location from "../components/locationChhooser";
 
 class DriverPage extends Component {
   constructor(props) {
@@ -60,7 +61,7 @@ class DriverPage extends Component {
       console.log(res.data.data);
       console.log("hello");
       this.setState({
-        driver_id: res.data.data[0].driver_id,
+        //driver_id: res.data.data[0].driver_id,
         d_name: res.data.data[0].d_name,
         d_phone_no: res.data.data[0].d_phone_no,
         taxi_id: res.data.data[0].taxi_id,
@@ -307,7 +308,7 @@ class DriverPage extends Component {
                     height="10px"
                     width="10px"
                   ></img>{" "} */}
-                  <div style={{ color: "black" }}>{this.state.myloc}</div>
+                  <div style={{ color: "black" }}><h5>{this.state.myloc}</h5></div>
                 </h3>
               ) : (
                 // </div>
@@ -337,6 +338,7 @@ class DriverPage extends Component {
               Trip Requests
             </button>
             <hr class="w-100" />
+            <div className='taxi-location'>
             <button
               type="button"
               class="btn btn-outline-dark"
@@ -345,6 +347,8 @@ class DriverPage extends Component {
             >
               My Taxi
             </button>
+            <Location />
+            </div>
 
             <div id="myModal" class="modal fade" role="dialog" tabIndex="-1">
               <div class="modal-dialog">

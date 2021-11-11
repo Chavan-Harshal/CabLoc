@@ -12,13 +12,13 @@ export default class Location extends Component {
       location: [],
       open: false,
       loc: "",
-      driver_id: this.props.driver,
+      driver_id: localStorage.getItem('driverId'),
     };
   }
   componentDidMount = async () => {
     await axios({
       method: "get",
-      url: "http://localhost:5000/getlocation",
+      url: "http://localhost:5000/customer/getlocnames",
     })
       .then((res) => {
         console.log(res);
@@ -37,13 +37,15 @@ export default class Location extends Component {
     });
   };
   getinput = (val) => {
+    console.log("harsh")
+    console.log(val)
     this.setState({
       loc: "val",
     });
     this.toggle();
     axios({
       method: "post",
-      url: "http://localhost:5000/api/update",
+      url: "http://localhost:5000/driver/update",
       data: {
         driver_id: this.state.driver_id,
         zipcode: val,
