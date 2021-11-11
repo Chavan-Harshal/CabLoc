@@ -29,6 +29,7 @@ class DriverPage extends Component {
       detail: false,
       fare: "",
       duration: "",
+      errormanage: "",
     };
   }
   getloc = () => {
@@ -51,6 +52,9 @@ class DriverPage extends Component {
       });
   };
   componentDidMount = async () => {
+    this.setState({
+      errormanage: "noerror",
+    });
     await axios({
       method: "post",
       url: "http://localhost:5000/driver/getme",
@@ -308,7 +312,9 @@ class DriverPage extends Component {
                     height="10px"
                     width="10px"
                   ></img>{" "} */}
-                  <div style={{ color: "black" }}><h5>{this.state.myloc}</h5></div>
+                  <div style={{ color: "black" }}>
+                    <h5>{this.state.myloc}</h5>
+                  </div>
                 </h3>
               ) : (
                 // </div>
@@ -338,16 +344,16 @@ class DriverPage extends Component {
               Trip Requests
             </button>
             <hr class="w-100" />
-            <div className='taxi-location'>
-            <button
-              type="button"
-              class="btn btn-outline-dark"
-              data-bs-toggle="modal"
-              data-bs-target="#myModal2"
-            >
-              My Taxi
-            </button>
-            <Location />
+            <div className="taxi-location">
+              <button
+                type="button"
+                class="btn btn-outline-dark"
+                data-bs-toggle="modal"
+                data-bs-target="#myModal2"
+              >
+                My Taxi
+              </button>
+              <Location />
             </div>
 
             <div id="myModal" class="modal fade" role="dialog" tabIndex="-1">

@@ -9,6 +9,7 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminPage from "./pages/AdminPage";
 import DriverPage from "./pages/DriverPage";
 import UserLocation from "./components/Usertrip";
+import temp from "./pages/temp";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route exact path="/AdminPage" component={AdminPage} />
         <Route exact path="/DriverPage" component={DriverPage} />
         <Route exact path="/UserTrip" component={UserLocation} />
+        <Route exace path="/temp" component={temp} />
       </BrowserRouter>
     </div>
   );

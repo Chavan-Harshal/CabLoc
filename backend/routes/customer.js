@@ -31,7 +31,7 @@ router.post("/getnearby", async (req, res) => {
 router.post("/booktrip", async (req, res) => {
   const { user_id, taxi_id, from_s, to_d, trip_id } = req.body;
   let driver_id = "";
-  // console.log(req.body);
+  console.log(req.body);
   await connection.query(
     `INSERT INTO trip3 values("${user_id}","${from_s}","${to_d}","${trip_id}");INSERT INTO trip2 values("${trip_id}","${from_s}","${to_d}","00:00:00",0);INSERT INTO last values("${user_id}", "${trip_id}");`,
     [1, 2, 3],
@@ -50,14 +50,15 @@ router.post("/booktrip", async (req, res) => {
       } else {
         // console.log(op);
         driver_id = op[0].driver_id;
-        // console.log(driver_id);
+        console.log(driver_id);
         await connection.query(
-          `INSERT INTO trip4 values("${trip_id}",1,FALSE,"${taxi_id}","${driver_id}")`,
+          `INSERT INTO trip4 values("${trip_id}",1,"0","${taxi_id}","${driver_id}")`,
           (e, op) => {
             if (e) {
               console.log(e);
               return res.status(404).json({ msg: "Error" });
             } else {
+              console.log(op);
               return res.status(200).json({ msg: "Request made" });
             }
           }

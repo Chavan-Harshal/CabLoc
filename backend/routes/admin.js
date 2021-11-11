@@ -24,8 +24,8 @@ router.post("/adddriver", async (req, res) => {
     UPDATE taxi1 SET driver_id="${driver_id}" where taxi_id="${taxi_id}";
     insert into works values("${driver_id}","2");
     insert into drives values("${driver_id}","${taxi_id}");
-    insert into present_at values("${driver_id}","414003");
-    insert into availability values("${taxi_id}","414003");`;
+    insert into present_at values("${driver_id}","411002");
+    insert into availability values("${taxi_id}","411002");`;
   console.log("hii");
   connection.query(`${que}`, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], (e, op) => {
     if (e) {

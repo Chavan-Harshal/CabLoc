@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import Axios from "axios";
 import ReactNotification, { store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
-import { StarRating } from "baseui/rating";
+// import { StarRating } from "baseui/rating";
+import ReactStars from "react-rating-stars-component";
+import { BACKEND_URL } from "../config";
 
 class UserLocation extends Component {
   constructor(props) {
@@ -20,9 +22,28 @@ class UserLocation extends Component {
       rating: 1,
       ongoingTrip: [],
       card: "",
+      zipcode: {},
     };
   }
   componentDidMount = async () => {
+    await Axios({
+      method: "get",
+      url: BACKEND_URL + "/customer/getlocnames",
+    })
+      .then(async (res) => {
+        console.log(res.data.data);
+        const loc = {};
+        for (let i = 0; i < res.data.data.length; i++) {
+          loc[res.data.data[i].zipcode] = res.data.data[i].loc_name;
+        }
+        this.setState({
+          zipcode: loc,
+        });
+      })
+      .catch((e) => {
+        console.log("error here");
+        console.log(e);
+      });
     await Axios({
       method: "get",
       url: "http://localhost:5000/customer/getlocation",
@@ -101,16 +122,16 @@ class UserLocation extends Component {
       });
   };
   getReq = async () => {
-    await Axios({
-      method: "post",
-      url: "http://localhost:5000/customer/getlast",
-      data: {
-        user_id: this.state.user_id,
-      },
-    }).then((res) => {
-      console.log(res);
-      localStorage.setItem("last", res.data);
-    });
+    // await Axios({
+    //   method: "post",
+    //   url: "http://localhost:5000/customer/getlast",
+    //   data: {
+    //     user_id: this.state.user_id,
+    //   },
+    // }).then((res) => {
+    //   console.log(res);
+    //   localStorage.setItem("last", res.data);
+    // });
     if (localStorage.getItem("last") === null) {
       await Axios({
         method: "post",
@@ -242,9 +263,17 @@ class UserLocation extends Component {
         console.log(e);
       });
   };
-  changeRating = (e) => {
+  // changeRating = (e) => {
+  //   this.setState({
+  //     rating: e.value,
+  //   });
+  // };
+
+  ratingChanged = (e) => {
+    console.log(e);
+    // console.log(e.target.value);
     this.setState({
-      rating: e.value,
+      rating: e,
     });
   };
 
@@ -279,12 +308,24 @@ class UserLocation extends Component {
     })
       .then((res) => {
         console.log(res);
+        // store.addNotification({
+        //   title: "Trip ended successfully",
+        //   message: "Thank you for the trip",
+        //   type: "success",
+        // });
         store.addNotification({
           title: "Trip ended successfully",
           message: "Thank you for the trip",
           type: "success",
+          container: "top-right",
+          animationIn: ["animated", "fadeIn"],
+          animationOut: ["animated", "fadeOut"],
+          dismiss: {
+            duration: 3000,
+            pauseOnHover: true,
+          },
         });
-        this.getongoing();
+        this.getOngoing();
       })
       .catch((e) => {
         console.log(e);
@@ -443,28 +484,33 @@ class UserLocation extends Component {
               <div className="card-body">
                 <h3 className="card-title">Ongoing trip</h3>
                 <h3>
-                  <img
+                  {/* <img
                     alt="icon"
                     src="https://www.pngkit.com/png/full/14-146161_white-location-icon-png-location-logo-png-white.png"
-                  ></img>{" "}
-                  To: {this.zipcode(this.state.ongoingTrip.to_d)}
+                  ></img>{" "} */}
+                  To: {this.state.zipcode[this.state.ongoingTrip.to_d]}
                 </h3>
                 <h3>
-                  <img
+                  {/* <img
                     alt="icon"
                     src="https://www.pngkit.com/png/full/14-146161_white-location-icon-png-location-logo-png-white.png"
-                  ></img>{" "}
-                  From: {this.zipcode(this.state.ongoingTrip.from_s)}
+                  ></img>{" "} */}
+                  From: {this.state.zipcode[this.state.ongoingTrip.from_s]}
                 </h3>
                 <h3>
-                  <img
+                  {/* <img
                     alt="icon"
                     src="https://www.iconsdb.com/icons/preview/white/indian-rupee-xxl.png"
-                  ></img>{" "}
+                  ></img>{" "} */}
                   Fare: ₹{this.state.ongoingTrip.fare}
                 </h3>
               </div>
-              <button type="button" class="btn btn-outline-dark">
+              <button
+                type="button"
+                class="btn btn-outline-dark"
+                data-bs-toggle="modal"
+                data-bs-target="#mymodal1"
+              >
                 End trip
               </button>
               <div
@@ -491,6 +537,11 @@ class UserLocation extends Component {
                         <img
                           className="img-fluid"
                           src="https://img.icons8.com/color/48/000000/mastercard-logo.png"
+                          // style={{
+                          //   width: "60px",
+                          //   height: "50px",
+                          //   // marginLeft: "30%",
+                          // }}
                         />
                         <div class="flex-fill mx-3">
                           <div class="form-outline">
@@ -508,12 +559,20 @@ class UserLocation extends Component {
                         </div>
                       </div>
                       <h3>Rate your trip</h3>
-                      <StarRating
-                        numItems={5}
-                        onChange={this.ratingChanged}
-                        size={32}
-                        value={this.state.rating}
-                      />
+                      <div
+                        style={{
+                          marginLeft: "31%",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <ReactStars
+                          count={5}
+                          onChange={this.ratingChanged}
+                          size={50}
+                          activeColor="#ffd700"
+                        />
+                      </div>
                       <button
                         type="button"
                         class="btn btn-outline-danger"
@@ -525,6 +584,7 @@ class UserLocation extends Component {
                         type="button"
                         class="btn btn-outline-dark"
                         data-bs-dismiss="modal"
+                        onClick={this.done}
                       >
                         Done
                       </button>

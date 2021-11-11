@@ -40,10 +40,10 @@ class CustomerLogin extends Component {
       pass: this.state.pass,
     };
     console.log(data);
-    localStorage.clear();
+    // localStorage.clear();
     axios.post(BACKEND_URL + "/api/login", data).then((res) => {
       if (res.status === 200) {
-        localStorage.clear();
+        // localStorage.clear();
         localStorage.setItem("userId", this.state.pass);
         localStorage.setItem("userName", this.state.name);
         this.props.history.push("/CustomerPage");

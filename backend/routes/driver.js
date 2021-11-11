@@ -3,11 +3,11 @@ const connection = require("../connection");
 
 router.post("/getme", (req, res) => {
   const data = req.body.driver_id;
-  // console.log(req.body);
-  // console.log("sdfkj");
-  // console.log(data);
-  // console.log("lsdkhfl");
-  // console.log(req.body);
+  console.log(req.body);
+  console.log("sdfkj");
+  console.log(data);
+  console.log("lsdkhfl");
+  console.log(req.body);
   connection.query(
     `select * from driver1 where driver_id="${data}";`,
     (e, op) => {
@@ -201,8 +201,8 @@ router.post("/approve", async (req, res) => {
 // Updates the drivers location
 router.post("/update", async (req, res) => {
   const { driver_id, zipcode } = req.body;
-  console.log("body")
-  console.log(req.body)
+  console.log("body");
+  console.log(req.body);
 
   connection.query(
     `UPDATE present_at set zipcode="${zipcode}" where driver_id="${driver_id}";UPDATE availability set zipcode="${zipcode}" WHERE taxi_id in (SELECT taxi_id from driver1 where driver_id ="${driver_id}")`,
