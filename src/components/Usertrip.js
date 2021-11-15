@@ -462,8 +462,6 @@ class UserLocation extends Component {
                           onClick={() => {
                             this.book(val.taxi_id);
                           }}
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
                         >
                           Book
                         </button>
@@ -478,132 +476,124 @@ class UserLocation extends Component {
             type="button"
             class="btn btn-outline-dark"
             onClick={this.getReq}
-            data-bs-toggle="modal"
-            data-bs-target="#mymodal2"
           >
             Check trip requests
           </button>
-
-          <div id="mymodal2" className="modal fade" role="dialog" tabIndex="-1">
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h4 className="modal-title">Ongoing trip</h4>
-                  <div className="modal-body">
-                    {this.state.approved ? (
-                      <div>
-                        {" "}
-                        <div>
-                          <h6>
-                            {this.state.zipcode[this.state.ongoingTrip.to_d]} -{" "}
-                            {this.state.zipcode[this.state.ongoingTrip.from_s]}
-                          </h6>
-
-                          <h6>
-                            {/* <img
+          {this.state.approved && (
+            <div className="card">
+              <div className="card-body">
+                <h3 className="card-title">Ongoing trip</h3>
+                <h3>
+                  {/* <img
+                    alt="icon"
+                    src="https://www.pngkit.com/png/full/14-146161_white-location-icon-png-location-logo-png-white.png"
+                  ></img>{" "} */}
+                  To: {this.state.zipcode[this.state.ongoingTrip.to_d]}
+                </h3>
+                <h3>
+                  {/* <img
+                    alt="icon"
+                    src="https://www.pngkit.com/png/full/14-146161_white-location-icon-png-location-logo-png-white.png"
+                  ></img>{" "} */}
+                  From: {this.state.zipcode[this.state.ongoingTrip.from_s]}
+                </h3>
+                <h3>
+                  {/* <img
                     alt="icon"
                     src="https://www.iconsdb.com/icons/preview/white/indian-rupee-xxl.png"
                   ></img>{" "} */}
-                            Fare: ₹{this.state.ongoingTrip.fare}
-                          </h6>
-                        </div>
-                        <button
-                          type="button"
-                          class="btn btn-outline-dark"
-                          data-bs-toggle="offcanvas"
-                          data-bs-target="#offcanvasRight1"
-                          aria-controls="offcanvasRight1"
-                        >
-                          End trip
-                        </button>
-                      </div>
-                    ) : (
-                      <div>No ongoing trips</div>
-                    )}
-
-                    <div
-                      className="offcanvas offcanvas-end"
-                      tabIndex="-1"
-                      id="offcanvasRight1"
-                      aria-labelledby="offcanvasRightLabel"
-                    >
-                      <div className="offcanvas-header">
-                        <h5 id="offcanvasRightLabel">Complete trip</h5>
-                        <button
-                          type="button"
-                          class="btn-close text-reset"
-                          data-bs-dismiss="offcanvas"
-                          aria-label="Close"
-                        ></button>
-                      </div>
-                      <div className="offcanvas-body"></div>
-                      <div className="modal-body">
-                        <h3>Thank you for riding with us</h3>
-                        <h5>Enter card number to complete payment</h5>
-                        <div className="d-flex flex-row align-items-center mb-4 pb-1">
-                          <img
-                            className="img-fluid"
-                            src="https://img.icons8.com/color/48/000000/mastercard-logo.png"
-                            style={{
-                              width: "60px",
-                              height: "50px",
-                            }}
-                          />
-                          <div class="flex-fill mx-3">
-                            <div class="form-outline">
-                              <input
-                                type="text"
-                                id="formControlLgXc"
-                                className="form-control form-control-lg"
-                                value={this.state.card}
-                                onChange={this.setCard}
-                              />
-                              <label
-                                className="form-label"
-                                for="formControlLgXc"
-                              >
-                                Card Number
-                              </label>
-                            </div>
+                  Fare: ₹{this.state.ongoingTrip.fare}
+                </h3>
+              </div>
+              <button
+                type="button"
+                class="btn btn-outline-dark"
+                data-bs-toggle="modal"
+                data-bs-target="#mymodal1"
+              >
+                End trip
+              </button>
+              <div
+                id="mymodal1"
+                className="modal fade"
+                role="dialog"
+                tabIndex="-1"
+              >
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h4 className="modal-title">Complete trip</h4>
+                      <button
+                        type="button"
+                        className="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div className="modal-body">
+                      <h3>Thank you for riding with us</h3>
+                      <h5>Enter card number to complete payment</h5>
+                      <div className="d-flex flex-row align-items-center mb-4 pb-1">
+                        <img
+                          className="img-fluid"
+                          src="https://img.icons8.com/color/48/000000/mastercard-logo.png"
+                          // style={{
+                          //   width: "60px",
+                          //   height: "50px",
+                          //   // marginLeft: "30%",
+                          // }}
+                        />
+                        <div class="flex-fill mx-3">
+                          <div class="form-outline">
+                            <input
+                              type="text"
+                              id="formControlLgXc"
+                              className="form-control form-control-lg"
+                              value={this.state.card}
+                              onChange={this.setCard}
+                            />
+                            <label className="form-label" for="formControlLgXc">
+                              Card Number
+                            </label>
                           </div>
                         </div>
-                        <h3>Rate your trip</h3>
-                        <div
-                          style={{
-                            marginLeft: "31%",
-                            justifyContent: "center",
-                            alignItems: "center",
-                          }}
-                        >
-                          <ReactStars
-                            count={5}
-                            onChange={this.ratingChanged}
-                            size={50}
-                            activeColor="#ffd700"
-                          />
-                        </div>
-                        <button
-                          type="button"
-                          class="btn btn-outline-danger"
-                          data-bs-dismiss="modal"
-                        >
-                          Cancel
-                        </button>
-                        <button
-                          type="button"
-                          class="btn btn-outline-dark"
-                          data-bs-dismiss="modal"
-                          onClick={this.done}
-                        >
-                          Done
-                        </button>
                       </div>
+                      <h3>Rate your trip</h3>
+                      <div
+                        style={{
+                          marginLeft: "31%",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <ReactStars
+                          count={5}
+                          onChange={this.ratingChanged}
+                          size={50}
+                          activeColor="#ffd700"
+                        />
+                      </div>
+                      <button
+                        type="button"
+                        class="btn btn-outline-danger"
+                        data-bs-dismiss="modal"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-outline-dark"
+                        data-bs-dismiss="modal"
+                        onClick={this.done}
+                      >
+                        Done
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     );
