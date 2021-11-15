@@ -518,7 +518,7 @@ class UserLocation extends Component {
                         </button>
                       </div>
                     ) : (
-                      <div>No ongoing trips !!</div>
+                      <div>No ongoing trips</div>
                     )}
 
                     <div
