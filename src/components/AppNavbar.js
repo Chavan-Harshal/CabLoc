@@ -63,7 +63,7 @@ class AppNavbar extends Component {
             </NavItem>
             <NavItem>
               <NavLink onClick={this.about}>
-                <Link to="/AboutUs">
+                <Link to="/AboutUs" style={{ textDecoration: "none" }}>
                   <span>About Us</span>
                 </Link>
               </NavLink>

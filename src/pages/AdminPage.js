@@ -5,6 +5,7 @@ import Axios from "axios";
 import ReactNotification, { store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 import { BACKEND_URL } from "../config";
+import StarRatingComponent from "react-star-rating-component";
 
 class AdminPage extends Component {
   constructor(props) {
@@ -19,6 +20,8 @@ class AdminPage extends Component {
       class: "",
       capacity: "",
       garage: [],
+      drivers: [],
+      users: [],
     };
   }
   getGarage = () => {
@@ -30,6 +33,38 @@ class AdminPage extends Component {
         console.log(res.data);
         this.setState({
           garage: res.data.garage,
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  getalldrivers = () => {
+    Axios({
+      method: "get",
+      url: BACKEND_URL + "/admin/getalldrivers",
+    })
+      .then((res) => {
+        console.log(res.data);
+        this.setState({
+          drivers: res.data.driver,
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  getallusers = () => {
+    Axios({
+      method: "get",
+      url: BACKEND_URL + "/admin/getallusers",
+    })
+      .then((res) => {
+        console.log(res.data);
+        this.setState({
+          users: res.data.users,
         });
       })
       .catch((e) => {
@@ -154,6 +189,7 @@ class AdminPage extends Component {
   };
 
   render() {
+    let count = 1;
     return (
       <div className="AdminPage">
         <AppNavbar />
@@ -181,6 +217,24 @@ class AdminPage extends Component {
               data-bs-target="#mymodal1"
             >
               Garage Info
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-dark"
+              onClick={this.getalldrivers}
+              data-bs-toggle="modal"
+              data-bs-target="#mymodal2"
+            >
+              All Drivers
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-dark"
+              onClick={this.getallusers}
+              data-bs-toggle="modal"
+              data-bs-target="#mymodal3"
+            >
+              Users
             </button>
           </div>
         </div>
@@ -314,6 +368,92 @@ class AdminPage extends Component {
                               <h6>Needs maintenance</h6>
                             )}
                           </td>
+                        </tr>
+                      </tbody>
+                    );
+                  })}
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="mymodal2" class="modal fade" role="dialog" tabIndex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">All Drivers</h4>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <table class="table table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">No</th>
+                      <th scope="col">Driver Name</th>
+                      <th scope="col">Driver Mobile</th>
+                      <th scope="col">Rating</th>
+                    </tr>
+                  </thead>
+                  {this.state.drivers.map((val, k) => {
+                    return (
+                      <tbody>
+                        <tr>
+                          <td>{count++}</td>
+                          <td>{val.d_name}</td>
+                          <td>{val.d_phone_no}</td>
+                          <td>
+                            <StarRatingComponent
+                              name="rate1"
+                              starCount={5}
+                              value={val.rating}
+                              // onStarClick={this.onStarClick.bind(this)}
+                              style={{ innerWidth: "30px" }}
+                            />
+                          </td>
+                        </tr>
+                      </tbody>
+                    );
+                  })}
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="mymodal3" class="modal fade" role="dialog" tabIndex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Users</h4>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <table class="table table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">No</th>
+                      <th scope="col">User Name</th>
+                      <th scope="col">User Mobile</th>
+                      <th scope="col">Address</th>
+                    </tr>
+                  </thead>
+                  {this.state.users.map((val, k) => {
+                    return (
+                      <tbody>
+                        <tr>
+                          <td>{count++}</td>
+                          <td>{val.name}</td>
+                          <td>{val.phone_no}</td>
+                          <td>{val.address}</td>
                         </tr>
                       </tbody>
                     );

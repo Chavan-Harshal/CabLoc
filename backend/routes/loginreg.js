@@ -55,7 +55,7 @@ router.post("/driverlogin", (req, res) => {
       } else {
         if (op.length === 0) {
           console.log("yes");
-          return res.status(200).json({ msg: "Invalid creds" });
+          return res.status(403).json({ msg: "Invalid creds" });
         } else {
           return res.status(200).json({ msg: "Success", data: op });
         }

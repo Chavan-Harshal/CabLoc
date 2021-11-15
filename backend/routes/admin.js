@@ -51,4 +51,42 @@ router.get("/getgarage", (req, res) => {
   );
 });
 
+router.get("/getalldrivers", (req, res) => {
+  console.log(req.data);
+  connection.query("select * from driver1;", (e, op) => {
+    if (e) {
+      console.log(e);
+      return res.status(404).json({ msg: "Error" });
+    } else {
+      console.log(op);
+      return res.status(200).json({ driver: op });
+    }
+  });
+});
+
+router.get("/getallusers", (req, res) => {
+  console.log(req.data);
+  let a;
+  connection.query("select * from user1", (e, op) => {
+    if (e) {
+      console.log(e);
+      return res.status(404).json({ msg: "Error" });
+    } else {
+      a = op;
+      for (let i = 0; i < a.length; i++) {
+        connection.query(
+          `select phone_no from user2 where user_id="${
+            a[i].user_id
+          };", select address from user3 where user_id="${a[i.user_id]}";`,
+          [1, 2],
+          (e, usr) => {
+            // console.l
+            console.log(usr);
+            return res.status(200).json({ users: usr });
+          }
+        );
+      }
+    }
+  });
+});
 module.exports = router;

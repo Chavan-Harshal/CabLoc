@@ -361,12 +361,14 @@ class DriverPage extends Component {
               // starRatedColor="blue"
               // edit={false}
             /> */}
-            <div style={{ width: "100px", height: "100px" }}>
+            <div>
+              <h6 style={{ fontWeight: 600 }}>Rating</h6>
               <StarRatingComponent
                 name="rate1"
                 starCount={5}
                 value={this.state.rating}
                 // onStarClick={this.onStarClick.bind(this)}
+                style={{ innerWidth: "30px" }}
               />
             </div>
             <div className="buttons">
