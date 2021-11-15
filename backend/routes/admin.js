@@ -64,28 +64,40 @@ router.get("/getalldrivers", (req, res) => {
   });
 });
 
+// router.get("/getallusers", (req, res) => {
+//   console.log(req.data);
+//   let a;
+//   connection.query("select * from user1", (e, op) => {
+//     if (e) {
+//       console.log(e);
+//       return res.status(404).json({ msg: "Error" });
+//     } else {
+//       a = op;
+//       for (let i = 0; i < a.length; i++) {
+//         connection.query(
+//           `select phone_no from user2 where user_id="${
+//             a[i].user_id
+//           };", select address from user3 where user_id="${a[i.user_id]}";`,
+//           [1, 2],
+//           (e, usr) => {
+//             // console.l
+//             console.log(usr);
+//             return res.status(200).json({ users: usr });
+//           }
+//         );
+//       }
+//     }
+//   });
+// });
 router.get("/getallusers", (req, res) => {
   console.log(req.data);
-  let a;
-  connection.query("select * from user1", (e, op) => {
+  connection.query("select name, phone_no, address from user1, user2, user3 where user1.user_id = user2.user_id and user2.user_id = user3.user_id;", (e, op) => {
     if (e) {
       console.log(e);
       return res.status(404).json({ msg: "Error" });
     } else {
-      a = op;
-      for (let i = 0; i < a.length; i++) {
-        connection.query(
-          `select phone_no from user2 where user_id="${
-            a[i].user_id
-          };", select address from user3 where user_id="${a[i.user_id]}";`,
-          [1, 2],
-          (e, usr) => {
-            // console.l
-            console.log(usr);
-            return res.status(200).json({ users: usr });
-          }
-        );
-      }
+      console.log(op);
+      return res.status(200).json({ users: op });
     }
   });
 });

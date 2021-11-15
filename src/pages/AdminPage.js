@@ -70,6 +70,7 @@ class AdminPage extends Component {
       .catch((e) => {
         console.log(e);
       });
+      console.log(this.state.users)
   };
 
   setName = (e) => {
