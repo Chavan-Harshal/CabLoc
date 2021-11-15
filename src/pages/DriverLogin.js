@@ -5,6 +5,7 @@ import "./CustomerLogin.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
+import { Redirect } from "react-router";
 
 class DriverLogin extends Component {
   constructor(props) {
@@ -41,12 +42,18 @@ class DriverLogin extends Component {
         localStorage.setItem("driverId", this.state.pass);
         localStorage.setItem("driverName", this.state.name);
         localStorage.setItem("role", "driver");
-        this.props.history.push("/DriverPage");
+        // this.props.history.push("/DriverPage");
+        this.setState({
+          login: true,
+        });
       }
     });
   };
 
   render() {
+    if (this.state.login) {
+      return <Redirect to="/DriverPage"></Redirect>;
+    }
     return (
       <div>
         <AppNavbar></AppNavbar>

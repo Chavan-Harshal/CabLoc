@@ -7,6 +7,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
 import { Redirect } from "react-router";
+import CustomerPage from "./CustomerPage";
 
 class CustomerLogin extends Component {
   constructor(props) {
@@ -42,15 +43,19 @@ class CustomerLogin extends Component {
     console.log(data);
     // localStorage.clear();
     axios.post(BACKEND_URL + "/api/login", data).then((res) => {
+      console.log(res);
       if (res.status === 200) {
         // localStorage.clear();
         localStorage.setItem("userId", this.state.pass);
         localStorage.setItem("userName", this.state.name);
         localStorage.setItem("role", "customer");
-        this.props.history.push("/CustomerPage");
+        // this.props.history.push("/CustomerPage");
+        this.setState({
+          login: true,
+        });
       }
     });
-    console.log(localStorage);
+    // console.log(localStorage);
   };
 
   handlename = (e) => {
@@ -78,6 +83,9 @@ class CustomerLogin extends Component {
   };
 
   render() {
+    if (this.state.login) {
+      return <Redirect to="/CustomerPage"></Redirect>;
+    }
     return (
       <div>
         <AppNavbar></AppNavbar>

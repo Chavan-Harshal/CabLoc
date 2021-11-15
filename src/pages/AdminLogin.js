@@ -3,6 +3,7 @@ import ReactNotification from "react-notifications-component";
 import AppNavbar from "../components/AppNavbar";
 import "./CustomerLogin.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Redirect } from "react-router";
 
 class AdminLogin extends Component {
   constructor(props) {
@@ -28,11 +29,17 @@ class AdminLogin extends Component {
   login = () => {
     if (this.state.name === "nikitatipule" && this.state.pass === "nikita26") {
       localStorage.setItem("role", "admin");
-      this.props.history.push("/AdminPage");
+      // this.props.history.push("/AdminPage");
+      this.setState({
+        login: true,
+      });
     }
   };
 
   render() {
+    if (this.state.login) {
+      return <Redirect to="/AdminPage"></Redirect>;
+    }
     return (
       <div>
         <AppNavbar></AppNavbar>

@@ -19,26 +19,26 @@ function App() {
         <Route exact path="/" component={HomePage} />
         <Route exact path="/CustomerLogin" component={CustomerLogin} />
         <Route exact path="/DriverLogin" component={DriverLogin} />
-        <ProtectedRoute
+        <Route
           allowedRoles={["customer"]}
           exact
           path="/CustomerPage"
           component={CustomerPage}
         />
         <Route exact path="/AdminLogin" component={AdminLogin} />
-        <ProtectedRoute
+        <Route
           allowedRoles={["admin"]}
           exact
           path="/AdminPage"
           component={AdminPage}
         />
-        <ProtectedRoute
+        <Route
           allowedRoles={["driver"]}
           exact
           path="/DriverPage"
           component={DriverPage}
         />
-        <ProtectedRoute
+        <Route
           allowedRoles={["customer"]}
           exact
           path="/UserTrip"

@@ -18,7 +18,7 @@ class AppNavbar extends Component {
   };
 
   logout = () => {
-    // localStorage.clear();
+    localStorage.clear();
     this.setState({ redirectHome: true });
   };
   home = () => {

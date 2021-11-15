@@ -6,6 +6,7 @@ import "./DriverPage.css";
 import ReactNotification, { store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 import Location from "../components/locationChhooser";
+import ReactStars from "react-rating-stars-component";
 
 class DriverPage extends Component {
   constructor(props) {
@@ -254,6 +255,18 @@ class DriverPage extends Component {
       })
       .catch((e) => {
         console.log(e);
+        store.addNotification({
+          title: "Error",
+          message: "Please try again",
+          type: "danger",
+          container: "top-right",
+          animationIn: ["animated", "fadeIn"],
+          animationOut: ["animated", "fadeOut"],
+          dismiss: {
+            duration: 3000,
+            pauseOnHover: true,
+          },
+        });
       });
   };
 
@@ -332,6 +345,17 @@ class DriverPage extends Component {
                 </h4>
               )}{" "}
             </b>
+            <hr class="w-100" />
+            <ReactStars
+              count={5}
+              // onChange={() => {}}
+              value={parseInt(this.state.rating, 10)}
+              size={50}
+              activeColor="#ffd700"
+              // isSelectable={true}
+              // starRatedColor="blue"
+              edit={false}
+            />
             <hr class="w-100" />
             <button
               type="button"

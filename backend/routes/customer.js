@@ -33,8 +33,8 @@ router.post("/booktrip", async (req, res) => {
   let driver_id = "";
   console.log(req.body);
   await connection.query(
-    `INSERT INTO trip3 values("${user_id}","${from_s}","${to_d}","${trip_id}");INSERT INTO trip2 values("${trip_id}","${from_s}","${to_d}","00:00:00",0);INSERT INTO last values("${user_id}", "${trip_id}");`,
-    [1, 2, 3],
+    `INSERT INTO trip3 values("${user_id}","${from_s}","${to_d}","${trip_id}");INSERT INTO trip2 values("${trip_id}","${from_s}","${to_d}","00:00:00",0);`,
+    [1, 2],
     (e, op) => {
       if (e) {
         console.log(e);
