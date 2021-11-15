@@ -7,6 +7,7 @@ import ReactNotification, { store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 import Location from "../components/locationChhooser";
 import ReactStars from "react-rating-stars-component";
+import StarRatingComponent from "react-star-rating-component";
 
 class DriverPage extends Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class DriverPage extends Component {
       driver_id: "",
       d_phone_no: "",
       taxi_id: "",
-      rating: "",
+      rating: 5,
       myloc: "",
       code: "",
       taxi: {},
@@ -296,6 +297,9 @@ class DriverPage extends Component {
   };
 
   render() {
+    const rate = this.state.rating;
+    console.log(typeof rate);
+    console.log(this.state.rating);
     return (
       <div class="DriverPage1">
         <AppNavbar />
@@ -337,7 +341,7 @@ class DriverPage extends Component {
             </div>
 
             <hr class="w-100" />
-            <b>
+            <b style={{ margin: 0 }}>
               My Shift:{" "}
               {this.state && this.state.shifts && (
                 <h4>
@@ -346,16 +350,26 @@ class DriverPage extends Component {
               )}{" "}
             </b>
             <hr class="w-100" />
-            <ReactStars
+            {console.log(this.state.rating)}
+            {/* <ReactStars
               count={5}
               // onChange={() => {}}
-              value={parseInt(this.state.rating, 10)}
+              value={this.state.rating == 0 ? 0 : (this.state.rating == 1 ? 1 : (this.state.rating == 2? 2 : (this.state.rating == 3? 3 : (this.state.rating == 4 ? 4 : 5))))}
               size={50}
-              activeColor="#ffd700"
+              // activeColor="#ffd700"
               // isSelectable={true}
               // starRatedColor="blue"
-              edit={false}
-            />
+              // edit={false}
+            /> */}
+            <div style={{ width: "100px", height: "100px" }}>
+              <StarRatingComponent
+                name="rate1"
+                starCount={5}
+                value={this.state.rating}
+                // onStarClick={this.onStarClick.bind(this)}
+              />
+            </div>
+
             <hr class="w-100" />
             <button
               type="button"
