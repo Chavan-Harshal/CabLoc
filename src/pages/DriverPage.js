@@ -369,21 +369,19 @@ class DriverPage extends Component {
                 // onStarClick={this.onStarClick.bind(this)}
               />
             </div>
+            <div className="buttons">
+              <button
+                type="button"
+                class="btn btn-outline-dark"
+                data-bs-toggle="modal"
+                data-bs-target="#myModal1"
+                onClick={() => {
+                  this.gettrips();
+                }}
+              >
+                Trip Requests
+              </button>
 
-            <hr class="w-100" />
-            <button
-              type="button"
-              class="btn btn-outline-dark"
-              data-bs-toggle="modal"
-              data-bs-target="#myModal1"
-              onClick={() => {
-                this.gettrips();
-              }}
-            >
-              Trip Requests
-            </button>
-            <hr class="w-100" />
-            <div className="taxi-location">
               <button
                 type="button"
                 class="btn btn-outline-dark"

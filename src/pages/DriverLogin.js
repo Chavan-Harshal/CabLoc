@@ -35,19 +35,34 @@ class DriverLogin extends Component {
     };
     console.log(data);
     // localStorage.clear();
-    axios.post(BACKEND_URL + "/api/driverlogin", data).then((res) => {
-      console.log(res);
-      if (res.status === 200) {
-        // localStorage.clear();
-        localStorage.setItem("driverId", this.state.pass);
-        localStorage.setItem("driverName", this.state.name);
-        localStorage.setItem("role", "driver");
-        // this.props.history.push("/DriverPage");
-        this.setState({
-          login: true,
+    axios
+      .post(BACKEND_URL + "/api/driverlogin", data)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          // localStorage.clear();
+          localStorage.setItem("driverId", this.state.pass);
+          localStorage.setItem("driverName", this.state.name);
+          localStorage.setItem("role", "driver");
+          // this.props.history.push("/DriverPage");
+          this.setState({
+            login: true,
+          });
+        }
+      })
+      .catch((e) => {
+        store.addNotification({
+          title: "Error",
+          message: "Try again",
+          type: "danger",
+          container: "bottom-center",
+          animationIn: ["animated", "fadeIn"],
+          animationOut: ["animated", "fadeOut"],
+          dismiss: {
+            duration: 3000,
+          },
         });
-      }
-    });
+      });
   };
 
   render() {

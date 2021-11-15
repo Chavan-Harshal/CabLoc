@@ -23,6 +23,25 @@ class CustomerLogin extends Component {
   }
   register = () => {
     // this.setState({ register: true });
+    if (
+      this.state.name.length === 0 ||
+      this.state.pass.length === 0 ||
+      this.state.phno.length != 10 ||
+      this.state.add.length === 0
+    ) {
+      store.addNotification({
+        title: "Error",
+        message: "Try again",
+        type: "danger",
+        container: "bottom-center",
+        animationIn: ["animated", "fadeIn"],
+        animationOut: ["animated", "fadeOut"],
+        dismiss: {
+          duration: 3000,
+        },
+      });
+      return;
+    }
     const data = {
       name: this.state.name,
       pass: this.state.pass,
@@ -30,9 +49,35 @@ class CustomerLogin extends Component {
       add: this.state.add,
     };
     console.log(data);
-    axios.post(BACKEND_URL + "/api/register", data).then((res) => {
-      console.log(res);
-    });
+    axios
+      .post(BACKEND_URL + "/api/register", data)
+      .then((res) => {
+        console.log(res);
+        store.addNotification({
+          title: "Registered Successfully",
+          message: "Log in to your account",
+          type: "success",
+          container: "bottom-center",
+          animationIn: ["animated", "fadeIn"],
+          animationOut: ["animated", "fadeOut"],
+          dismiss: {
+            duration: 3000,
+          },
+        });
+      })
+      .catch((e) => {
+        store.addNotification({
+          title: "Error",
+          message: "Try again",
+          type: "danger",
+          container: "bottom-center",
+          animationIn: ["animated", "fadeIn"],
+          animationOut: ["animated", "fadeOut"],
+          dismiss: {
+            duration: 3000,
+          },
+        });
+      });
   };
 
   login = () => {
@@ -42,19 +87,34 @@ class CustomerLogin extends Component {
     };
     console.log(data);
     // localStorage.clear();
-    axios.post(BACKEND_URL + "/api/login", data).then((res) => {
-      console.log(res);
-      if (res.status === 200) {
-        // localStorage.clear();
-        localStorage.setItem("userId", this.state.pass);
-        localStorage.setItem("userName", this.state.name);
-        localStorage.setItem("role", "customer");
-        // this.props.history.push("/CustomerPage");
-        this.setState({
-          login: true,
+    axios
+      .post(BACKEND_URL + "/api/login", data)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          // localStorage.clear();
+          localStorage.setItem("userId", this.state.pass);
+          localStorage.setItem("userName", this.state.name);
+          localStorage.setItem("role", "customer");
+          // this.props.history.push("/CustomerPage");
+          this.setState({
+            login: true,
+          });
+        }
+      })
+      .catch((e) => {
+        store.addNotification({
+          title: "Error",
+          message: "Try again",
+          type: "danger",
+          container: "bottom-center",
+          animationIn: ["animated", "fadeIn"],
+          animationOut: ["animated", "fadeOut"],
+          dismiss: {
+            duration: 3000,
+          },
         });
-      }
-    });
+      });
     // console.log(localStorage);
   };
 

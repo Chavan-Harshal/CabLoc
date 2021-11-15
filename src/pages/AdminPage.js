@@ -81,6 +81,31 @@ class AdminPage extends Component {
   addDriver = async () => {
     const driverId = Math.floor(Math.random() * 100000).toString();
     const taxiId = "tx" + Math.floor(Math.random() * 100000).toString();
+
+    if (
+      this.state.name.length === 0 ||
+      this.state.phone.length != 10 ||
+      this.state.rating.length === 0 ||
+      this.state.taxiNo.length === 0 ||
+      this.state.color.length === 0 ||
+      this.state.class.length === 0 ||
+      this.state.model.length === 0 ||
+      this.state.capacity.length === 0
+    ) {
+      store.addNotification({
+        title: "Error",
+        message: "Try again",
+        type: "danger",
+        container: "bottom-center",
+        animationIn: ["animated", "fadeIn"],
+        animationOut: ["animated", "fadeOut"],
+        dismiss: {
+          duration: 3000,
+        },
+      });
+      return;
+    }
+
     const data = {
       driver_id: driverId,
       taxi_id: taxiId,
