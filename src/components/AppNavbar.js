@@ -3,7 +3,8 @@ import { Navbar, NavbarBrand, NavItem, NavLink, Nav } from "reactstrap";
 import logo from "../logo.png";
 import "./Appnavbar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
+import { About } from "../pages/About";
 
 class AppNavbar extends Component {
   constructor(props) {
@@ -28,6 +29,7 @@ class AppNavbar extends Component {
       role: role,
     });
   };
+
   render() {
     if (this.state.redirectHome === true) {
       return <Redirect to="/" push></Redirect>;
@@ -60,8 +62,10 @@ class AppNavbar extends Component {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink onClick={() => console.log("About Us")}>
-                <span>About Us</span>
+              <NavLink onClick={this.about}>
+                <Link to="/AboutUs">
+                  <span>About Us</span>
+                </Link>
               </NavLink>
             </NavItem>
             <NavItem>

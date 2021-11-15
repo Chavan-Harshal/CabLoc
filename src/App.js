@@ -11,6 +11,7 @@ import DriverPage from "./pages/DriverPage";
 import UserLocation from "./components/Usertrip";
 import temp from "./pages/temp";
 import ProtectedRoute from "./components/ProtectedRoute";
+import About from "./pages/About";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route exact path="/" component={HomePage} />
         <Route exact path="/CustomerLogin" component={CustomerLogin} />
         <Route exact path="/DriverLogin" component={DriverLogin} />
+        <Route exact path="/AboutUs" component={About} />
         <Route
           allowedRoles={["customer"]}
           exact

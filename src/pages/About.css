@@ -1,0 +1,36 @@
+.About1{
+    background-image: url("https://images.unsplash.com/photo-1582820795651-f358eebe4406?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=871&q=80");
+    font-family: "Times New Roman", Times, serif;
+    background-size: cover;
+    height: 180vh;
+}
+
+h1{
+    padding-top:20px;
+}
+
+h1,h2{
+    font-family: "Times New Roman", Times, serif;
+}
+
+.jumbotron{
+    height: 180vh;
+    margin-left: 300px;
+    margin-right: 300px;
+}
+.info
+{
+    background-color: rgb(0, 0, 0, 0.7);
+}
+.paragraph{
+    padding-top: 20px;
+    text-align: justify;
+    padding-left:7px;
+    padding-right:7px;
+    font-size: large;
+}
+
+
+ul{
+    list-style-type:disc;
+}
