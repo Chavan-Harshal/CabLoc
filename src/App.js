@@ -10,6 +10,7 @@ import AdminPage from "./pages/AdminPage";
 import DriverPage from "./pages/DriverPage";
 import UserLocation from "./components/Usertrip";
 import temp from "./pages/temp";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -18,11 +19,31 @@ function App() {
         <Route exact path="/" component={HomePage} />
         <Route exact path="/CustomerLogin" component={CustomerLogin} />
         <Route exact path="/DriverLogin" component={DriverLogin} />
-        <Route exact path="/CustomerPage" component={CustomerPage} />
+        <ProtectedRoute
+          allowedRoles={["customer"]}
+          exact
+          path="/CustomerPage"
+          component={CustomerPage}
+        />
         <Route exact path="/AdminLogin" component={AdminLogin} />
-        <Route exact path="/AdminPage" component={AdminPage} />
-        <Route exact path="/DriverPage" component={DriverPage} />
-        <Route exact path="/UserTrip" component={UserLocation} />
+        <ProtectedRoute
+          allowedRoles={["admin"]}
+          exact
+          path="/AdminPage"
+          component={AdminPage}
+        />
+        <ProtectedRoute
+          allowedRoles={["driver"]}
+          exact
+          path="/DriverPage"
+          component={DriverPage}
+        />
+        <ProtectedRoute
+          allowedRoles={["customer"]}
+          exact
+          path="/UserTrip"
+          component={UserLocation}
+        />
         <Route exace path="/temp" component={temp} />
       </BrowserRouter>
     </div>

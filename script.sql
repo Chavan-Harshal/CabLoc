@@ -124,7 +124,7 @@ CREATE TABLE trip3 (
 CREATE TABLE trip4(
     trip_id varchar(20),
     rating int,
-    status varchar(10),
+    status boolean,
     taxi_id varchar(20),
     driver_id varchar(20),
     PRIMARY KEY (trip_id, taxi_id, driver_id),

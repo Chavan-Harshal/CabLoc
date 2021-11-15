@@ -27,6 +27,7 @@ class AdminLogin extends Component {
 
   login = () => {
     if (this.state.name === "nikitatipule" && this.state.pass === "nikita26") {
+      localStorage.setItem("role", "admin");
       this.props.history.push("/AdminPage");
     }
   };

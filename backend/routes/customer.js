@@ -52,7 +52,7 @@ router.post("/booktrip", async (req, res) => {
         driver_id = op[0].driver_id;
         console.log(driver_id);
         await connection.query(
-          `INSERT INTO trip4 values("${trip_id}",1,"0","${taxi_id}","${driver_id}")`,
+          `INSERT INTO trip4 values("${trip_id}",1,0,"${taxi_id}","${driver_id}")`,
           (e, op) => {
             if (e) {
               console.log(e);
@@ -173,7 +173,7 @@ router.post("/checkstatus", (req, res) => {
           return res.status(200).json({ msg: "approved" });
         } else {
           connection.query(
-            `SELECT * FROM trip4 where trip_id="${trip_id}" and status="0"`,
+            `SELECT * FROM trip4 where trip_id="${trip_id}" and status=FALSE`,
             (err, opt) => {
               if (err) {
                 console.log(err);

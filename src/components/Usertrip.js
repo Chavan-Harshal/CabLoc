@@ -174,7 +174,7 @@ class UserLocation extends Component {
         this.setState({
           approved: true,
         });
-        localStorage.clear("last");
+        localStorage.removeItem("last");
         console.log("Approved");
       } else if (res.data.msg === "wait") {
         store.addNotification({
@@ -325,7 +325,7 @@ class UserLocation extends Component {
             pauseOnHover: true,
           },
         });
-        this.getOngoing();
+        this.getOngoing(data.trip_id);
       })
       .catch((e) => {
         console.log(e);

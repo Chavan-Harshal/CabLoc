@@ -101,7 +101,7 @@ router.post("/getrequests", (req, res) => {
   const { taxi_id } = req.body;
   // console.log(taxi_id);
   connection.query(
-    `SELECT * FROM trip4 WHERE taxi_id="${taxi_id}" and status="0"`,
+    `SELECT * FROM trip4 WHERE taxi_id="${taxi_id}" and status=FALSE;`,
     async (e, op) => {
       if (e) {
         console.log(e);
@@ -172,7 +172,7 @@ router.post("/approve", async (req, res) => {
         from_s = op[0].from_s;
         to_d = op[0].to_d;
         await connection.query(
-          `UPDATE trip2 SET duration="${duration}",fare=${fare} WHERE from_s="${from_s}" and to_d="${to_d}" and trip_id="${trip_id}";UPDATE trip4 SET status="1" WHERE trip_id="${trip_id}"`,
+          `UPDATE trip2 SET duration="${duration}",fare=${fare} WHERE from_s="${from_s}" and to_d="${to_d}" and trip_id="${trip_id}";UPDATE trip4 SET status=1 WHERE trip_id="${trip_id}"`,
           [1, 2],
           (e, op) => {
             if (e) {

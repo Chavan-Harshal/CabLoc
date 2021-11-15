@@ -5,10 +5,10 @@
             <div className="card-body">
               <h3 className="card-title">Ongoing trip</h3>
               <h3>
-                {/* <img
+                <img
                   alt="icon"
                   src="https://www.pngkit.com/png/full/14-146161_white-location-icon-png-location-logo-png-white.png"
-                ></img>{" "} */}
+                ></img>{" "}
                 To: {this.state.zipcode[this.state.ongoingTrip.to_d]}
               </h3>
               <h3>
@@ -25,6 +25,12 @@
                 ></img>{" "}
                 Fare: ₹{this.state.ongoingTrip.fare}
               </h3>
+              <StarRating
+                        numItems={5}
+                        onChange={this.ratingChanged}
+                        size={32}
+                        value={this.state.rating}
+                      />
             </div>
             <button
               type="button"

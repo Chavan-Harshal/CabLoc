@@ -40,6 +40,7 @@ class DriverLogin extends Component {
         // localStorage.clear();
         localStorage.setItem("driverId", this.state.pass);
         localStorage.setItem("driverName", this.state.name);
+        localStorage.setItem("role", "driver");
         this.props.history.push("/DriverPage");
       }
     });

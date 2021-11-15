@@ -5,6 +5,15 @@ import AppNavbar from "../components/AppNavbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 class HomePage extends Component {
+  customer = () => {
+    this.props.history.push("/CustomerLogin");
+  };
+  driver = () => {
+    this.props.history.push("/DriverLogin");
+  };
+  admin = () => {
+    this.props.history.push("/AdminLogin");
+  };
   render() {
     return (
       <div>
@@ -16,16 +25,16 @@ class HomePage extends Component {
               <br /> DESTINATION
             </h1>
             <br />
-            <span>Log in</span>
-            <a href="/CustomerLogin" class="btn btn-outline-dark">
+            {/* <span>Log in</span> */}
+            <button class="btn btn-outline-dark" onClick={this.customer}>
               Customer
-            </a>
-            <a href="/DriverLogin" class="btn btn-outline-dark">
+            </button>
+            <button class="btn btn-outline-dark" onClick={this.driver}>
               Driver
-            </a>
-            <a href="/AdminLogin" class="btn btn-outline-dark">
+            </button>
+            <button class="btn btn-outline-dark" onClick={this.admin}>
               Admin
-            </a>
+            </button>
           </div>
         </div>
       </div>

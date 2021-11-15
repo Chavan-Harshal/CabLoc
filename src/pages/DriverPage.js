@@ -267,6 +267,7 @@ class DriverPage extends Component {
     this.setState({
       detail: !this.state.detail,
     });
+    this.props.history.push("/DriverPage");
   };
 
   getfare = (fare) => {

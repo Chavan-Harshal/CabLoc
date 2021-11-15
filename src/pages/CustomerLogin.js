@@ -46,6 +46,7 @@ class CustomerLogin extends Component {
         // localStorage.clear();
         localStorage.setItem("userId", this.state.pass);
         localStorage.setItem("userName", this.state.name);
+        localStorage.setItem("role", "customer");
         this.props.history.push("/CustomerPage");
       }
     });
