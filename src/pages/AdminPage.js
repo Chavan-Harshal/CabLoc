@@ -70,7 +70,7 @@ class AdminPage extends Component {
       .catch((e) => {
         console.log(e);
       });
-      console.log(this.state.users)
+    console.log(this.state.users);
   };
 
   setName = (e) => {
@@ -191,6 +191,7 @@ class AdminPage extends Component {
 
   render() {
     let count = 1;
+    let usercount = 1;
     return (
       <div className="AdminPage">
         <AppNavbar />
@@ -451,7 +452,7 @@ class AdminPage extends Component {
                     return (
                       <tbody>
                         <tr>
-                          <td>{count++}</td>
+                          <td>{usercount++}</td>
                           <td>{val.name}</td>
                           <td>{val.phone_no}</td>
                           <td>{val.address}</td>

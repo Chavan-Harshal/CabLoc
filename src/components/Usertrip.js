@@ -495,8 +495,8 @@ class UserLocation extends Component {
                         {" "}
                         <div>
                           <h6>
-                            {this.state.zipcode[this.state.ongoingTrip.to_d]} -{" "}
-                            {this.state.zipcode[this.state.ongoingTrip.from_s]}
+                            {this.state.zipcode[this.state.ongoingTrip.from_s]}{" "}
+                            - {this.state.zipcode[this.state.ongoingTrip.to_d]}
                           </h6>
 
                           <h6>
