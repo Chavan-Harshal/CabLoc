@@ -14,7 +14,7 @@ Also drivers can view their profile and can accept/reject trip requests through 
 
 #### ER Diagram
 
-<img src="ER.jpg">
+<img src="ER.png">
 
 <hr>
 
@@ -96,9 +96,9 @@ The project consists of three interfaces:
 ## Team Members :
 
 ```
-- [Nikita Tipule](https://github.com/NikitaTipule)
-- [Harshal Chavan](https://github.com/Chavan-Harshal)
-- [Ketaki Jadhav](https://github.com/Ketaki-k-jadhav)
+1. Nikita Tipule - 111903051
+2. Harshal Chavan - 111903036
+3. Ketaki Jadhav - 111903040
 ```
 
 <hr></hr>
