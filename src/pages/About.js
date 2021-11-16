@@ -9,7 +9,6 @@ class About extends Component {
       <div class="About1">
         <AppNavbar />
         <div class="info">
-          <div class="jumbotron">
             <h1>
               <b>About us</b>
             </h1>
@@ -100,7 +99,6 @@ class About extends Component {
                   </ul>
                 </li>
               </ol>
-            </div>
           </div>
         </div>
       </div>
