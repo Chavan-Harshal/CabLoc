@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ReactNotification from "react-notifications-component";
+import ReactNotification, { store } from "react-notifications-component";
 import AppNavbar from "../components/AppNavbar";
 import "./CustomerLogin.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -32,6 +32,18 @@ class AdminLogin extends Component {
       // this.props.history.push("/AdminPage");
       this.setState({
         login: true,
+      });
+    } else {
+      store.addNotification({
+        title: "Error",
+        message: "Try again",
+        type: "danger",
+        container: "bottom-center",
+        animationIn: ["animated", "fadeIn"],
+        animationOut: ["animated", "fadeOut"],
+        dismiss: {
+          duration: 3000,
+        },
       });
     }
   };

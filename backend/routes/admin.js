@@ -91,14 +91,17 @@ router.get("/getalldrivers", (req, res) => {
 // });
 router.get("/getallusers", (req, res) => {
   console.log(req.data);
-  connection.query("select name, phone_no, address from user1, user2, user3 where user1.user_id = user2.user_id and user2.user_id = user3.user_id;", (e, op) => {
-    if (e) {
-      console.log(e);
-      return res.status(404).json({ msg: "Error" });
-    } else {
-      console.log(op);
-      return res.status(200).json({ users: op });
+  connection.query(
+    "select name, phone_no, address from user1, user2, user3 where user1.user_id = user2.user_id and user2.user_id = user3.user_id;",
+    (e, op) => {
+      if (e) {
+        console.log(e);
+        return res.status(404).json({ msg: "Error" });
+      } else {
+        console.log(op);
+        return res.status(200).json({ users: op });
+      }
     }
-  });
+  );
 });
 module.exports = router;
