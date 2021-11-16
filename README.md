@@ -1,70 +1,104 @@
-# Getting Started with Create React App
+# DBMS MINI PROJECT : CabLoc - A Taxi Management Service
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<b>A database schema for Taxi Management services.</b><br>
 
-## Available Scripts
+<hr>
 
-In the project directory, you can run:
+#### Project Description:
 
-### `npm start`
+<b>CabLoc - A Taxi management service</b><br>
+With the increasing demand of online services, the taxi booking services have emerged to be one of the primary sectors where databases are employed heavily. Although there is a lot of optimizations and tools being deployed for the major real-life use cases, a simple and basic version of the same design pattern is aimed at by this project. The major focus of CabLoc is to simulate a smaller case scenario of a location based reactive system. The basic requirement of the entire project will rely heavily on the database design and the way the data is represented for the needed services. CabLoc will provide a similar web-interface wherein a customer can book taxis that are in a proximity to their current location and create trips to new locations.
+Also drivers can view their profile and can accept/reject trip requests through home page. Admins of the system can add drivers and also can see the garage status of the vehicles.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<hr>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+#### ER Diagram
 
-### `npm test`
+<img src="ER.png">
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<hr>
 
-### `npm run build`
+#### Tech Stack Used:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+Programming Languages:
+1. JavaScript
+2. HTML
+3. CSS
+4. SQL
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Frameworks:
+1. MySQL
+2. React
+3. Express
+4. NodeJS
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<hr>
 
-### `npm run eject`
+##### Installation guide:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```sh
+git clone https://github.com/NikitaTipule/CabLoc.git
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Install the dependencies
+cd CabLoc & npm i
+cd CabLoc/backend & npm i
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# Run the frontend
+npm start
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# Run the backend
+cd backend
+nodemon server.js
+```
 
-## Learn More
+<hr>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Project Features:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The project consists of three interfaces:
 
-### Code Splitting
+1. <b>Admin</b>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+1. Add Drivers
+2. View the Garage Status
+```
 
-### Analyzing the Bundle Size
+2. <b>Customer</b>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
+1. Can login/register into the system
+2. The customer can request for new trips from the home screen
+3. The source and destination of the trips can be selected and the nearby taxis will be listed.
+4. From the list one taxi can be selected and the driver will be notified about the request.
+5. The status of booking can be viewed.
+6. Once the driver approves the request then then trip will be started.
+7. The trip can be ended by the customer by providing rating and payment details.
+```
 
-### Making a Progressive Web App
+3. <b>Driver</b>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```
+1. Can login to the system and view their profile.
+2. Profile contains details about name, phone number, current location, rating, their vehicle, information about the vehicle etc.
+3. Can update current location from the home screen.
+3. The driver can check their shift times and taxi details.
+4. All the trip requests to the driver can be seen in requests list.
+5. The driver can approve the trip and select fare and duration of the ride.
+6. The driver can also reject the trip.
+7. The driver will get rating after completing the trip.
+```
 
-### Advanced Configuration
+<hr>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Team Members :
 
-### Deployment
+```
+ * <a href="https://github.com/NikitaTipule">Nikita Tipule</a>
+ * <a href="https://github.com/Chavan-Harshal">Harshal Chavan</a>
+ * <a href="https://github.com/Ketaki-k-jadhav">Ketaki Jadhav</a>
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<hr></hr>
