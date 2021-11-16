@@ -95,10 +95,8 @@ The project consists of three interfaces:
 
 ## Team Members :
 
-```
-1. Nikita Tipule - 111903051
-2. Harshal Chavan - 111903036
-3. Ketaki Jadhav - 111903040
-```
+ * <a href="https://github.com/NikitaTipule">Nikita Tipule</a>
+ * <a href="https://github.com/Chavan-Harshal">Harshal Chavan</a>
+ * <a href="https://github.com/Ketaki-k-jadhav">Ketaki Jadhav</a>
 
 <hr></hr>
